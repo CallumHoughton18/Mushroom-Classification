@@ -10,6 +10,11 @@ class DataCleaner:
         self.train = mushroom_df
 
     def onehot_encode(self):
-        #return pd.get_dummies(self.train)
         train_onehot = pd.get_dummies(self.train)
         return train_onehot
+
+def segment_data(df):
+    train = df.sample(frac=0.8, random_state=0)
+    test = df.drop(train.index)
+    return[train, test]
+        
