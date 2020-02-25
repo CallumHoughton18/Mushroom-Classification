@@ -1,7 +1,6 @@
 import numpy as np
 
 def lg_gradient_descent(X, y, theta, alpha, maxIters, lambdaVal):
-    print(X[1])
     m=len(y)
     JHistory=np.zeros(maxIters)
     alphaTerm=alpha * (1/m)
