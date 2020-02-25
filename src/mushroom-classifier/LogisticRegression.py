@@ -3,11 +3,11 @@ from GradientDescent import GradientDescent
 from mlutils import sigmoid
 
 class LogisticRegression:
-    def __init__(self, learning_rate=0.01, num_iter=500, fit_intercept=True):
+    def __init__(self, learning_rate=0.01, num_iter=500, fit_intercept=True, verbose=False):
         self.learning_rate = learning_rate
         self.num_iter = num_iter
         self.fit_intercept = fit_intercept
-        self.log_callback = lambda: None
+        self.verbose = verbose
 
     def __add_intercept(self, X):
         intercept = np.ones((X.shape[0], 1))
@@ -40,10 +40,13 @@ class LogisticRegression:
         min_method = GradientDescent(self.__hypothesis,
                                      self.__cost_function, 
                                      X, y, theta, 
-                                     intercept_added=self.fit_intercept,
-                                     log_callback=self.log_callback)
+                                     intercept_added=self.fit_intercept)
 
-        self.theta = min_method.calculate(num_iter=3000, learning_rate=1, lambdaTerm=1)
+        [newTheta, costs] = min_method.calculate(num_iter=3000, learning_rate=1, lambdaTerm=1)
+        self.theta = newTheta
+        if self.verbose:
+            for cost in costs:
+                print(f'Cost: {cost}')
         
         
     

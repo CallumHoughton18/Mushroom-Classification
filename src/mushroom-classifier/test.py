@@ -18,7 +18,7 @@ y = y[randomize]
 train_X, test_X = X[:80,:], X[80:,:]
 train_y, test_y = y[:80], y[80:]
 
-model = LogisticRegression(learning_rate=0.1, num_iter=3000, fit_intercept=True)
+model = LogisticRegression(learning_rate=0.1, num_iter=3000, verbose=True)
 model.setup_logger(log)
 model.train(train_X, train_y)
 
