@@ -2,6 +2,7 @@ import numpy as np
 import pickle
 from LogisticRegression import LogisticRegression
 from DataCleaner import DataCleaner
+from TrainingDiagnostics import plot_cost
 
 def log(message):
     print(message)
@@ -11,7 +12,9 @@ data_cleaner = DataCleaner('../files/mushrooms.csv','class','p')
 
 model = LogisticRegression(learning_rate=1, num_iter=500, verbose=True)
 model.setup_logger(log)
-model.train(train_X, train_y)
+[thetas, costs] = model.train(train_X, train_y)
+print('plotting costs...')
+plot_cost(costs)
 
 preds = model.predict(test_X)
 accuracy = (preds == test_y).mean()

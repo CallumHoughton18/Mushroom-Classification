@@ -47,6 +47,8 @@ class LogisticRegression:
         if self.verbose:
             for cost in costs:
                 print(f'Cost: {cost}')
+
+        return [newTheta, costs]
         
         
     
