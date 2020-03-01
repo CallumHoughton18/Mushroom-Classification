@@ -18,7 +18,7 @@ class GradientDescent():
         costs = []
         for i in range(num_iter):
             grad = self.__calculate_gradient() + self.__calc_regulization(lambdaTerm)
-            self.theta -=  grad * learning_rate
+            self.theta -= learning_rate * grad
 
             new_h=self.hypothesis_function(self.X, self.theta)
             costs.append(self.cost_function(new_h, self.y))
