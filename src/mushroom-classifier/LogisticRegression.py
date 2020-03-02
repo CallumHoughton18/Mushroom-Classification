@@ -13,10 +13,10 @@ class LogisticRegression:
         intercept = np.ones((X.shape[0], 1))
         return np.concatenate((intercept, X), axis=1)
     
-    def __hypothesis(self, X, theta):
+    def hypothesis(self, X, theta):
         return sigmoid(np.dot(X, theta))
 
-    def __cost_function(self, h, y):
+    def cost_function(self, h, y):
         cost = (-y * np.log(h) - (1 - y) * np.log(1 - h)).mean()
         return cost
 
@@ -37,13 +37,13 @@ class LogisticRegression:
             X = self.__add_intercept(X)
 
         theta = np.zeros(X.shape[1])
-        min_method = GradientDescent(self.__hypothesis,
-                                     self.__cost_function, 
+        min_method = GradientDescent(self.hypothesis,
+                                     self.cost_function, 
                                      X, y, theta, 
                                      intercept_added=self.fit_intercept)
 
-        [newTheta, costs] = min_method.calculate(num_iter=3000, learning_rate=1, lambdaTerm=1)
-        self.theta = newTheta
+        [newTheta, costs] = min_method.calculate(num_iter=600, learning_rate=1, lambdaTerm=1)
+        self.theta = theta
         if self.verbose:
             for cost in costs:
                 print(f'Cost: {cost}')
