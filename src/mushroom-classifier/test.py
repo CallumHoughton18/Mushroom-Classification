@@ -1,13 +1,15 @@
 import numpy as np
-import pickle
 from LogisticRegression import LogisticRegression
 from DataCleaner import DataCleaner
 from TrainingDiagnostics import TrainingDiagnostics
+from ModelStorage import ModelStorage
+import os.path as path
 
 def log(message):
     print(message)
-    
+
 training_diagnostics = TrainingDiagnostics()
+model_storage = ModelStorage("./trained_models")
 data_cleaner = DataCleaner('../files/mushrooms.csv','class','p')
 [train_X, test_X, train_y, test_y]  = data_cleaner.clean()
 
@@ -19,16 +21,11 @@ model.setup_logger(log)
 [thetas, costs] = model.train(train_X, train_y)
 training_diagnostics.plot_cost(costs)
 
-training_diagnostics.save_diagostics('./')
-
 preds = model.predict(test_X)
 accuracy = (preds == test_y).mean()
 print(accuracy)
 
-filename = "test_model.sav"
-pickle.dump(model, open(filename, "wb"))
-
-loaded_model = pickle.load(open(filename, "rb"))
-loaded_accuracy = (loaded_model.predict(test_X) == test_y).mean()
-print(loaded_accuracy)
+model_file_path = model_storage.save(model)
+model_dir = path.dirname(model_file_path)
+training_diagnostics.save_diagostics(model_dir)
 
