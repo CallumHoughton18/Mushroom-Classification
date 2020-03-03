@@ -7,13 +7,13 @@ class ModelStorage():
         self.base_storage_folder = base_storage_folder
 
     def save(self, model):
-        model_dir = self._make_model_folder()
+        model_dir = self.__make_model_folder()
         model_file_path = os.path.join(model_dir, 'model.sav')
         pickle.dump(model, open(model_file_path, "wb"))
         return model_file_path
 
 
-    def _make_model_folder(self):
+    def __make_model_folder(self):
         timestamp = '{:%m-%d-%y %H:%M %S}'.format(dt.datetime.now())
         new_model_dir = os.path.join(self.base_storage_folder, timestamp)
         os.makedirs(new_model_dir)

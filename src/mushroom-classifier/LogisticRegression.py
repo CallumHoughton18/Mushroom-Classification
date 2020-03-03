@@ -1,17 +1,14 @@
 import numpy as np
 from GradientDescent import GradientDescent
+from modelbase import ModelBase
 from mlutils import sigmoid
 
-class LogisticRegression:
+class LogisticRegression(ModelBase):
     def __init__(self, learning_rate=0.01, num_iter=500, fit_intercept=True, verbose=False):
         self.learning_rate = learning_rate
         self.num_iter = num_iter
         self.fit_intercept = fit_intercept
         self.verbose = verbose
-
-    def __add_intercept(self, X):
-        intercept = np.ones((X.shape[0], 1))
-        return np.concatenate((intercept, X), axis=1)
     
     def hypothesis(self, X, theta):
         return sigmoid(np.dot(X, theta))
@@ -22,7 +19,7 @@ class LogisticRegression:
 
     def __predict_prob(self, X, theta): 
         if self.fit_intercept:
-            X = self.__add_intercept(X)
+            X = self.add_intercept(X)
             
         return sigmoid(np.dot(X, theta))
 
@@ -34,7 +31,7 @@ class LogisticRegression:
 
     def train(self, X, y):
         if self.fit_intercept:
-            X = self.__add_intercept(X)
+            X = self.add_intercept(X)
 
         theta = np.zeros(X.shape[1])
         min_method = GradientDescent(self.hypothesis,
