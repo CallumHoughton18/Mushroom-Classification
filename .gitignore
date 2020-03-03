@@ -1,3 +1,6 @@
+# Project specific ignores
+trained_models/
+
 # VSCode ignores
 .vscode/*
 *.code-workspace
