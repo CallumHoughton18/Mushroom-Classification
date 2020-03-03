@@ -1,5 +1,5 @@
 import numpy as np
-from GradientDescent import GradientDescent
+from gradientdescent import GradientDescent
 from modelbase import ModelBase
 from mlutils import sigmoid
 

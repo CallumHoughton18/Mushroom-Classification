@@ -1,8 +1,8 @@
 import numpy as np
-from LogisticRegression import LogisticRegression
-from DataCleaner import DataCleaner
-from TrainingDiagnostics import TrainingDiagnostics
-from ModelStorage import ModelStorage
+from logisticregression import LogisticRegression
+from datacleaner import DataCleaner
+from trainingdiagnostics import TrainingDiagnostics
+from modelstorage import ModelStorage
 import os.path as path
 
 def log(message):
