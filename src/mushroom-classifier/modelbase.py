@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from mlutils import add_intercept
 import numpy as np
 
 class ModelBase(ABC):
@@ -22,7 +23,9 @@ class ModelBase(ABC):
         pass
 
     def add_intercept(self, X):
-        intercept = np.ones((X.shape[0], 1))
-        return np.concatenate((intercept, X), axis=1)
+        return add_intercept(X)
+
+
+
 
 
