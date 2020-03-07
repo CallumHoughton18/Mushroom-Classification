@@ -11,7 +11,7 @@ def log(message):
 
 training_diagnostics = TrainingDiagnostics()
 model_storage = ModelStorage("./trained_models")
-data_cleaner = DataCleaner('../files/mushrooms.csv','class','p')
+data_cleaner = DataCleaner('./files/mushrooms.csv','class','p')
 [train_X, test_X, train_y, test_y]  = data_cleaner.clean()
 
 model = LogisticRegression(learning_rate=1, num_iter=500, fit_intercept=False)
