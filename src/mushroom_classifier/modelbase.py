@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from mlutils import add_intercept
+from mushroom_classifier.mlutils import add_intercept
 import numpy as np
 
 class ModelBase(ABC):

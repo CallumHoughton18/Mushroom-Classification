@@ -1,7 +1,7 @@
 import numpy as np
-from gradientdescent import GradientDescent
-from modelbase import ModelBase
-from mlutils import sigmoid
+from .gradientdescent import GradientDescent
+from .modelbase import ModelBase
+from .mlutils import sigmoid
 
 class LogisticRegression(ModelBase):
     def __init__(self, learning_rate=0.01, num_iter=500, fit_intercept=True, verbose=False):

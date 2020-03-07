@@ -1,9 +1,10 @@
 import numpy as np
-from logisticregression import LogisticRegression
-from datacleaner import DataCleaner
-from trainingdiagnostics import TrainingDiagnostics
-from modelstorage import ModelStorage
 from os import path
+
+from mushroom_classifier.logisticregression import LogisticRegression
+from mushroom_classifier.datacleaner import DataCleaner
+from mushroom_classifier.trainingdiagnostics import TrainingDiagnostics
+from mushroom_classifier.modelstorage import ModelStorage
 
 def log(message):
     print(message)
