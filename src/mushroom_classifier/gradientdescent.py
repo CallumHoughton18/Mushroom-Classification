@@ -25,8 +25,15 @@ class GradientDescent():
         return [self.theta, costs]
 
     def __calc_regulization(self, lambdaTerm):
-        theta_for_reg = self.theta[:1:] if self.intercept_added else self.theta
+        theta_for_reg = None
+        if self.intercept_added:
+            theta_for_reg = np.copy(self.theta)
+            theta_for_reg[0] = 0
+        else:
+            theta_for_reg = self.theta
+        #theta_for_reg = self.theta[1:] if self.intercept_added else self.theta
         regularlizedTerm = np.dot((lambdaTerm/self.y.shape[0]), theta_for_reg)
+        #print(regularlizedTerm)
         return regularlizedTerm
 
 
