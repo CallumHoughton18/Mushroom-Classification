@@ -39,7 +39,7 @@ class LogisticRegression(ModelBase):
                                      X, y, theta, 
                                      intercept_added=self.fit_intercept)
 
-        [newTheta, costs] = min_method.calculate(num_iter=600, learning_rate=1, lambdaTerm=1)
+        [newTheta, costs] = min_method.calculate(num_iter=self.num_iter, learning_rate=1, lambdaTerm=1)
         self.theta = theta
         if self.verbose:
             for cost in costs:
