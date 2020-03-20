@@ -7,17 +7,20 @@ from mushroom_classifier.datacleaner import DataCleaner
 from mushroom_classifier.trainingdiagnostics import TrainingDiagnostics
 from mushroom_classifier.modelstorage import ModelStorage
 
+import pandas as pd
+
 class TrainingTests(TestBase):
     
     @classmethod
     def setUpClass(cls):
         currentdir = path.dirname(path.realpath(__file__))
         cls.test_dump_path = path.join(currentdir,"test_dump")
-        cls.test_dataset = path.join(currentdir, "test_files/mushrooms_small_sample.csv")
+        cls.test_dataset_path = path.join(currentdir, "test_files/mushrooms_small_sample.csv")
 
     def test_training_correct_shapes(self):
         test_iters = 500
-        data_cleaner = DataCleaner(self.test_dataset,"class","p")
+        test_dataset = pd.read_csv(self.test_dataset_path)
+        data_cleaner = DataCleaner(test_dataset,"class","p")
         [train_X, test_X, train_y, test_y]  = data_cleaner.clean()
         self.assertTrue(train_X.shape == (169,59), f"train_X shape expected:(169,59), actual{train_X.shape}")
         self.assertTrue(test_X.shape == (30,59),  f"test_X shape expected:(30,59), actual{test_X.shape}")
