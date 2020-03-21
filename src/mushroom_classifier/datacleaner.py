@@ -28,3 +28,8 @@ class DataCleaner:
     def __extract_y_values(self, classification_column_name, truth_value):
         y = (self.train[classification_column_name].T == truth_value).astype(int)
         return y
+
+    # def __train_test_split(X, y, train_size=0.85, test_size=0.15):
+    #     full_set = np.concatenate((X, y), axis=1)
+    #     np.random.shuffle(full_set)
+    #     np.split(full_set, 2, )
