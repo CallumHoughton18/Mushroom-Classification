@@ -22,10 +22,10 @@ class TrainingTests(TestBase):
         test_dataset = pd.read_csv(self.test_dataset_path)
         data_cleaner = DataCleaner(test_dataset,"class","p")
         [train_X, test_X, train_y, test_y]  = data_cleaner.clean()
-        self.assertTrue(train_X.shape == (169,59), f"train_X shape expected:(169,59), actual{train_X.shape}")
-        self.assertTrue(test_X.shape == (30,59),  f"test_X shape expected:(30,59), actual{test_X.shape}")
-        self.assertTrue(train_y.shape == (169,),  f"train_y shape expected:(169,), actual{train_y.shape}")
-        self.assertTrue(test_y.shape == (30,),  f"test_y shape expected:(30,), actual{test_y.shape}")
+        self.assertTrue(train_X.shape == (159,59), f"train_X shape expected:(169,59), actual{train_X.shape}")
+        self.assertTrue(test_X.shape == (40,59),  f"test_X shape expected:(30,59), actual{test_X.shape}")
+        self.assertTrue(train_y.shape == (159,),  f"train_y shape expected:(169,), actual{train_y.shape}")
+        self.assertTrue(test_y.shape == (40,),  f"test_y shape expected:(30,), actual{test_y.shape}")
 
 
         model = LogisticRegression(learning_rate=1, num_iter=test_iters, fit_intercept=True)

@@ -6,3 +6,8 @@ def sigmoid(z):
 def add_intercept(X):
     intercept = np.ones((X.shape[0], 1))
     return np.concatenate((intercept, X), axis=1)
+
+def shuffle_arrays_in_unison(a, b):
+    assert len(a) == len(b)
+    p = np.random.permutation(len(a))
+    return a[p], b[p]
