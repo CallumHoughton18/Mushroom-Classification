@@ -37,3 +37,4 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+src/mushroom_classifier/path_constants.py
