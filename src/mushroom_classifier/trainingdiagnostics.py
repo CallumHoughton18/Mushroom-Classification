@@ -37,6 +37,7 @@ class TrainingDiagnostics():
         ax.title.set_text("Learning Curves")
         ax.set_ylabel("Cost")
         ax.set_xlabel("# Of Training Examples")
+        ax.legend(['training set', 'cross validation set'])
         ax.plot(steps, error_training)
         ax.plot(steps, error_validation)
 
