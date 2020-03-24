@@ -21,8 +21,8 @@ def shuffle_arrays_in_unison(first_array, second_array):
 
 def train_test_split(x_matrix, y_matrix, train_size=0.8):
     """Split given arrays in training sets and test sets"""
-    indx_from = int(np.round(X.shape[0] * train_size))
-    x_matrix, y_matrix = shuffle_arrays_in_unison(X, y)
+    indx_from = int(np.round(x_matrix.shape[0] * train_size))
+    x_matrix, y_matrix = shuffle_arrays_in_unison(x_matrix, y_matrix)
 
     training_x_matrix = x_matrix[:indx_from, :]
     test_x_matrix = x_matrix[indx_from:, :]
