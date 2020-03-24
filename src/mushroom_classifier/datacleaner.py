@@ -1,44 +1,37 @@
+"""
+Required to work with data as dataframe, and onehot encode
+"""
 import pandas as pd
-import numpy as np
-from mushroom_classifier.mlutils import shuffle_arrays_in_unison
+from mushroom_classifier.mlutils import train_test_split
 
 class DataCleaner:
-    train = None
-
-    """Encodes and splits the given dataset"""
+    """Cleans the classification dataset, providing the ability to onehot encode it"""
     def __init__(self, dataset_df, classification_column_name, truth_value):
         self.train = dataset_df
         self.classification_column_name = classification_column_name
         self.truth_value = truth_value
         self.columns_for_index = None
+        self.train_encoded = None
 
     def clean(self):
-        X = self.__onehot_encode(self.classification_column_name)
-        y = self.__extract_y_values(self.classification_column_name, self.truth_value)
-        return self.__train_test_split(X, y)
+        """Splits the encoded dataset into training and test sets"""
+        x_matrix = self.__onehot_encode(self.classification_column_name)
+        y_vector = self.__extract_y_values(
+            self.classification_column_name, self.truth_value)
+        return train_test_split(x_matrix, y_vector)
 
     def clean_new_unseen_data(self, new_data):
-        new_X = pd.get_dummies(new_data)
-        return new_X.reindex(columns=self.columns_for_index,fill_value=0)
+        """Splits and encodes unseen data, reindexing it"""
+        new_x_matrix = pd.get_dummies(new_data)
+        return new_x_matrix.reindex(columns=self.columns_for_index, fill_value=0)
 
     def __onehot_encode(self, classification_column_name):
-        X = pd.get_dummies(self.train.drop(classification_column_name, axis=1))
-        self.train_encoded = X
+        x_matrix = pd.get_dummies(self.train.drop(classification_column_name, axis=1))
+        self.train_encoded = x_matrix
         self.columns_for_index = self.train_encoded.columns
-        return X.values
+        return x_matrix.values
 
     def __extract_y_values(self, classification_column_name, truth_value):
-        y = (self.train[classification_column_name].T == truth_value).astype(int)
-        return y
-
-    def __train_test_split(self, X, y, train_size=0.8):
-        indx_from = int(np.round(X.shape[0] * train_size))
-        X, y = shuffle_arrays_in_unison(X, y)
-
-        training_X = X[:indx_from,:]
-        test_X  =  X[indx_from:,:]
-
-        training_y = y[:indx_from]
-        test_y =  y[indx_from:]
-
-        return [training_X, test_X, training_y, test_y]
+        y_vector = (self.train[classification_column_name].T ==
+                    truth_value).astype(int)
+        return y_vector

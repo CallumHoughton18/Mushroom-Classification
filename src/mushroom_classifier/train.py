@@ -22,11 +22,13 @@ dataset = pd.read_csv(dataset_path)
 data_cleaner = DataCleaner(dataset,'class','p')
 
 log('cleaning data...')
+# Typically would want a cross validation set to optimize learning rate and regularization
+# but as these parameters are fine as is, the splitting just gives a train and test set
 [train_X, test_X, train_y, test_y]  = data_cleaner.clean()
 
 log('plotting learning curve...')
 model = LogisticRegression(learning_rate=1, num_iter=500, fit_intercept=False)
-training_diagnostics.plot_learning_curve(train_X, train_y, test_X, test_y, model, max_training_size=2000)
+training_diagnostics.plot_learning_curve(train_X, train_y, test_X, test_y, model, max_training_size=2500)
 
 log('training actual model...')
 model.setup_logger(log)

@@ -37,9 +37,10 @@ class TrainingDiagnostics():
         ax.title.set_text("Learning Curves")
         ax.set_ylabel("Cost")
         ax.set_xlabel("# Of Training Examples")
-        ax.legend(['training set', 'cross validation set'])
-        ax.plot(steps, error_training)
-        ax.plot(steps, error_validation)
+        ax.plot(steps, error_training, label="Training Set")
+        ax.plot(steps, error_validation, label="Validation Set")
+        ax.legend(loc="upper right")
+
 
     def save_diagostics(self, folder_path):
         if not os.path.exists(folder_path):
