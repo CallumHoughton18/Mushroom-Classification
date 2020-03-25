@@ -1,11 +1,11 @@
 """
-Required to perform linear algebra with given x_matrix and y_vector values
+Contains GradientDescent class
 """
 import numpy as np
 
 class GradientDescent():
     """Performs gradient descent calculations"""
-    def __init__(self, hypothesis_function, cost_function, 
+    def __init__(self, hypothesis_function, cost_function,
                  x_matrix, y_vector, theta, intercept_added):
         self.x_matrix = x_matrix
         self.y_vector = y_vector
@@ -22,7 +22,7 @@ class GradientDescent():
     def calculate(self, num_iter, learning_rate=1, lambda_term=1):
         """Performs gradient descent, returning the theta values, and cost values per iteration"""
         costs = []
-        for i in range(num_iter):
+        for _ in range(num_iter):
             grad = self.__calculate_gradient() + self.__calc_regulization(lambda_term)
             self.theta -= learning_rate * grad
 

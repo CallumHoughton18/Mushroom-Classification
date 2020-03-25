@@ -1,3 +1,7 @@
+"""
+Contains constants of absolute file paths
+specified by environmental variables
+"""
 from os import environ
 
 DATASET_DIR = environ.get("DATASET_DIR")

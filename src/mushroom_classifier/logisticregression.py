@@ -1,5 +1,5 @@
 """
-Required to perform linear algebra with given x_matrix and y_vector values
+Contains LogisticRegression class
 """
 import numpy as np
 from .gradientdescent import GradientDescent
@@ -17,11 +17,11 @@ class LogisticRegression(ModelBase):
         self.log_callback = None
         self.theta = []
 
-    def hypothesis(self, X, theta):
-        return sigmoid(np.dot(X, theta))
+    def hypothesis(self, x_matrix, theta):
+        return sigmoid(np.dot(x_matrix, theta))
 
-    def cost_function(self, h, y):
-        cost = (-y * np.log(h) - (1 - y) * np.log(1 - h)).mean()
+    def cost_function(self, hypothesis, y_vector):
+        cost = (-y_vector * np.log(hypothesis) - (1 - y_vector) * np.log(1 - hypothesis)).mean()
         return cost
 
     def __predict_prob(self, x_vector, theta):
@@ -33,17 +33,17 @@ class LogisticRegression(ModelBase):
         """Sets internal log callback property"""
         self.log_callback = logger_function
 
-    def predict(self, X, threshold=0.5):
-        return self.__predict_prob(X, self.theta) >= threshold
+    def predict(self, x_matrix, threshold=0.5):
+        return self.__predict_prob(x_matrix, self.theta) >= threshold
 
-    def train(self, X, y):
+    def train(self, x_matrix, y_vector):
         if self.fit_intercept:
-            X = self.add_intercept(X)
+            x_matrix = self.add_intercept(x_matrix)
 
-        theta = np.zeros(X.shape[1])
+        theta = np.zeros(x_matrix.shape[1])
         min_method = GradientDescent(self.hypothesis,
                                      self.cost_function,
-                                     X, y, theta,
+                                     x_matrix, y_vector, theta,
                                      intercept_added=self.fit_intercept)
 
         [new_theta, costs] = min_method.calculate(num_iter=self.num_iter,

@@ -1,5 +1,6 @@
 """
-Required to perform linear algebra with given arrays for util methods
+Contains useful utility functions
+for machine learning
 """
 import numpy as np
 

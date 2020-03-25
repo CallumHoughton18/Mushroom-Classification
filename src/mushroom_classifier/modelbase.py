@@ -1,31 +1,29 @@
+"""
+Contains ModelBase
+a base class intended for all ML models
+"""
 from abc import ABC, abstractmethod
 from mushroom_classifier.mlutils import add_intercept
-import numpy as np
 
 class ModelBase(ABC):
-    def __init__(self):
-        super().__init__()
+    """base class for ML models"""
 
     @abstractmethod
-    def hypothesis(self, X, theta):
-        pass
-    
-    @abstractmethod
-    def cost_function(self, h, y):
-        pass
+    def hypothesis(self, x_matrix, theta):
+        """Hypothesis astract method"""
 
     @abstractmethod
-    def predict(self, X, threshold):
-        pass
+    def cost_function(self, hypothesis, y_vector):
+        """Hypothesis astract method"""
 
     @abstractmethod
-    def train(self, X, y):
-        pass
+    def predict(self, x_matrix, threshold):
+        """Hypothesis astract method"""
 
-    def add_intercept(self, X):
-        return add_intercept(X)
+    @abstractmethod
+    def train(self, x_matrix, y_vector):
+        """Hypothesis astract method"""
 
-
-
-
-
+    def add_intercept(self, x_matrix):
+        """Returns x_matrix with intercept added"""
+        return add_intercept(x_matrix)
