@@ -29,5 +29,5 @@ class LogisticRegressionTests(TestBase):
 
         self.assertAlmostEqual(expected_cost, actual_cost, places=7)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

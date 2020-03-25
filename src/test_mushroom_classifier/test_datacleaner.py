@@ -55,5 +55,5 @@ class DataCleanerTests(TestBase):
                                       expected_cleaned_train_y_vector)
         np.testing.assert_array_equal(actual_cleaned_test_y_vector, expected_cleaned_test_y_vector)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

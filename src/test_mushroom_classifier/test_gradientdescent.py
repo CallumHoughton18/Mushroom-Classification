@@ -49,5 +49,5 @@ class GradientDescentTests(TestBase):
         np.testing.assert_array_equal(expected_costs, actual_costs)
         np.testing.assert_array_equal(expected_theta, actual_theta)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

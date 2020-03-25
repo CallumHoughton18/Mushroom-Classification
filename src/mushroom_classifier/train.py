@@ -27,7 +27,7 @@ def log(message):
 
 print(DATASET_DIR)
 models_folder = TRAINED_MODELS_DIR
-dataset_path = path.join(DATASET_DIR, "mushrooms.csv")
+dataset_path = path.join(DATASET_DIR, 'mushrooms.csv')
 training_diagnostics = TrainingDiagnostics()
 model_storage = ModelStorage(models_folder)
 dataset = pd.read_csv(dataset_path)

@@ -16,8 +16,8 @@ class TrainingTests(TestBase):
     @classmethod
     def setUpClass(cls):
         currentdir = path.dirname(path.realpath(__file__))
-        cls.test_dump_path = path.join(currentdir, "test_dump")
-        cls.test_dataset_path = path.join(currentdir, "test_files/mushrooms_small_sample.csv")
+        cls.test_dump_path = path.join(currentdir, 'test_dump')
+        cls.test_dataset_path = path.join(currentdir, 'test_files/mushrooms_small_sample.csv')
 
     def test_training_correct_shapes(self):
         """Checks shapes of cleaned data, and returned costs/thetas"""
@@ -26,13 +26,13 @@ class TrainingTests(TestBase):
         data_cleaner = DataCleaner(test_dataset, "class", "p")
         [train_x_matrix, test_x_matrix, train_y_vector, test_y_vector] = data_cleaner.clean()
         self.assertTrue(train_x_matrix.shape == (159, 59),
-                        f"train_X shape expected:(169,59), actual{train_x_matrix.shape}")
+                        f'train_X shape expected:(169,59), actual{train_x_matrix.shape}')
         self.assertTrue(test_x_matrix.shape == (40, 59),
-                        f"test_X shape expected:(30,59), actual{test_x_matrix.shape}")
+                        f'test_X shape expected:(30,59), actual{test_x_matrix.shape}')
         self.assertTrue(train_y_vector.shape == (159,),
-                        f"train_y shape expected:(169,), actual{train_y_vector.shape}")
+                        f'train_y shape expected:(169,), actual{train_y_vector.shape}')
         self.assertTrue(test_y_vector.shape == (40,),
-                        f"test_y shape expected:(30,), actual{test_y_vector.shape}")
+                        f'test_y shape expected:(30,), actual{test_y_vector.shape}')
 
 
         model = LogisticRegression(learning_rate=1, num_iter=test_iters, fit_intercept=True)
@@ -41,13 +41,13 @@ class TrainingTests(TestBase):
         [thetas, costs] = model.train(train_x_matrix, train_y_vector)
 
         #60 as the intercept has been added to X matrix during training process
-        self.assertTrue(thetas.shape == (60,), f"Weight amount expected:60, actual{thetas.shape}")
+        self.assertTrue(thetas.shape == (60,), f'Weight amount expected:60, actual{thetas.shape}')
         self.assertTrue(len(costs) == test_iters,
-                        f"Costs amount expected:{test_iters}, actual {len(costs)}")
+                        f'Costs amount expected:{test_iters}, actual {len(costs)}')
 
     def mock_log(self):
         """Mock log method"""
         return None
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

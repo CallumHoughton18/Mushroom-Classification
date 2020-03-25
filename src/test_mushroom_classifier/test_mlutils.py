@@ -22,5 +22,5 @@ class AddInterceptTests(TestBase):
         np.testing.assert_array_equal(expected_x_matrix_with_intercept,
                                       actual_x_matrix_with_intercept)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

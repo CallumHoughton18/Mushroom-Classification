@@ -14,7 +14,7 @@ class ModelStorage():
         """saves given object to disk, in folder based on current time"""
         model_dir = self.__make_model_folder()
         obj_file_path = path.join(model_dir, objectname+'.sav')
-        dump(obj, open(obj_file_path, "wb"))
+        dump(obj, open(obj_file_path, 'wb'))
         return obj_file_path
 
 

@@ -13,7 +13,7 @@ class ModelStorageTests(TestBase):
     @classmethod
     def setUpClass(cls):
         currentdir = path.dirname(path.realpath(__file__))
-        cls.test_dump_path = path.join(currentdir, "model_test_dump")
+        cls.test_dump_path = path.join(currentdir, 'model_test_dump')
 
     @classmethod
     def tearDownClass(cls):
@@ -32,5 +32,5 @@ class MockModel():
     def __init__(self):
         return None
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

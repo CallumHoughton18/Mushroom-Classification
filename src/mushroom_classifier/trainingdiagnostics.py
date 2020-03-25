@@ -44,12 +44,12 @@ class TrainingDiagnostics():
             error_validation.append(cost_validation_set)
 
         graph_ax = self.mainfig.add_subplot(222)
-        graph_ax.title.set_text("Learning Curves")
-        graph_ax.set_ylabel("Cost")
-        graph_ax.set_xlabel("# Of Training Examples")
-        graph_ax.plot(steps, error_training, label="Training Set")
-        graph_ax.plot(steps, error_validation, label="Validation Set")
-        graph_ax.legend(loc="upper right")
+        graph_ax.title.set_text('Learning Curves')
+        graph_ax.set_ylabel('Cost')
+        graph_ax.set_xlabel('# Of Training Examples')
+        graph_ax.plot(steps, error_training, label='Training Set')
+        graph_ax.plot(steps, error_validation, label='Validation Set')
+        graph_ax.legend(loc='upper right')
 
 
     def save_diagostics(self, folder_path):
