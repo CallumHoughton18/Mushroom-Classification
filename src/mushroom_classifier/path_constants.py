@@ -1,6 +1,6 @@
 """
 Contains constants of absolute file paths
-specified by environmental variables
+specified by environment variables
 """
 from os import environ
 
