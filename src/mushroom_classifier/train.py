@@ -44,7 +44,6 @@ training_diagnostics.plot_learning_curve(train_X, train_y,
                                          test_X, test_y, model, max_training_size=2500)
 
 log('training actual model...')
-model.setup_logger(log)
 model.fit_intercept = True
 [thetas, costs] = model.train(train_X, train_y)
 training_diagnostics.plot_cost(costs)
