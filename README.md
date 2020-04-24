@@ -14,6 +14,9 @@ Absolute paths also need to be set as environment variables for the `train.py` s
 `export CURRENT_MODEL_DIR=ABSOLUTE-PATH-TO-CURRENT-MODEL-FOLDER`
 `export TRAINED_MODELS_DIR=ABSOLUTE-PATH-TO-TRAINED-MODEL-FOLDER`
 
+The API also requires the path to the features definition file specified via a environment variable:
+`export FEATURE_DEFINITION_PATH=ABSOLUTE-PATH-TO-DEFINITION-FILE`
+
 To use the provided dataset in this repository set the `DATASET_DIR` environment variable to the absolute path of the `files` folder, as to correctly run the `train.py` script a `mushrooms.csv` file and `unseen_mushrooms.csv` file need to be present in the `DATASET_DIR` directory.
 
 Before the `train.py` script is ran, you should run the available tests for the `mushroom_classifier` module.
