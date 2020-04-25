@@ -1,6 +1,5 @@
 """Prediction routes controller"""
-
-from flask import Blueprint, request, Response, jsonify, current_app as app
+from flask import Blueprint, request, jsonify, current_app as app
 
 from api.custom_route_decorators import validate_prediction_json
 from api.helpers import create_error_response
