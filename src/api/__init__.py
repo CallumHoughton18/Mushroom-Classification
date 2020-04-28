@@ -1,7 +1,8 @@
 """Initialization file for API, bootstrapping the API"""
 from pickle import load
 from os import environ
-from os.path import join
+from os.path import join, dirname, abspath
+from logging.config import fileConfig
 import json
 
 from flask import Flask
@@ -15,6 +16,10 @@ from mushroom_classifier.datacleaner import DataCleaner
 from mushroom_classifier.logisticregression import LogisticRegression
 
 APP = Flask(__name__)
+
+# Logging needs to be done in separate setup file, reduce bloat of this bootstrapper file
+#LOG_FILE_PATH = join(dirname(abspath(__file__)), 'logger-config.yaml')
+#fileConfig(LOG_FILE_PATH)
 
 MODEL_FILE_PATH = join(CURRENT_MODEL_DIR, 'model.sav')
 COLUMNS_FILE_PATH = join(CURRENT_MODEL_DIR, 'columns_for_index.sav')
