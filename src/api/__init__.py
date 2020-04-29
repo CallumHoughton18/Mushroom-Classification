@@ -8,6 +8,7 @@ import json
 from flask import Flask
 import pandas as pd
 
+from api import logger
 from api.prediction.controllers import PREDICTION
 from api.weights.controllers import WEIGHTS
 
@@ -15,11 +16,12 @@ from mushroom_classifier.path_constants import CURRENT_MODEL_DIR, DATASET_DIR
 from mushroom_classifier.datacleaner import DataCleaner
 from mushroom_classifier.logisticregression import LogisticRegression
 
-APP = Flask(__name__)
-
 # Logging needs to be done in separate setup file, reduce bloat of this bootstrapper file
-#LOG_FILE_PATH = join(dirname(abspath(__file__)), 'logger-config.yaml')
-#fileConfig(LOG_FILE_PATH)
+LOG_CONFIG_PATH = join(dirname(abspath(__file__)), 'logger-config.yaml')
+LOG_FILE_PATH = environ.get('LOGS_DIRECTORY')
+logger.setup_logging(LOG_CONFIG_PATH, LOG_FILE_PATH)
+
+APP = Flask(__name__)
 
 MODEL_FILE_PATH = join(CURRENT_MODEL_DIR, 'model.sav')
 COLUMNS_FILE_PATH = join(CURRENT_MODEL_DIR, 'columns_for_index.sav')

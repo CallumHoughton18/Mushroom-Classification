@@ -22,5 +22,4 @@ def submit():
     user_prediction_verified = request.verified_json
     pred_service = UserPredictionService(app.DATA_CLEANER, app.MODEL)
     unseen_pred = pred_service.make_prediction(user_prediction_verified)
-    jsonify()
     return jsonify({"poisonous": bool(unseen_pred)})
