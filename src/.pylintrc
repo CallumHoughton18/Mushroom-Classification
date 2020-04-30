@@ -186,6 +186,9 @@ never-returning-functions=sys.exit
 
 [FORMAT]
 
+# Maximum number of characters on a single line.
+max-line-length=240
+
 # Expected format of line ending, e.g. empty (any line ending), LF or CRLF.
 expected-line-ending-format=
 
@@ -198,9 +201,6 @@ indent-after-paren=4
 # String used as indentation unit. This is usually "    " (4 spaces) or "\t" (1
 # tab).
 indent-string='    '
-
-# Maximum number of characters on a single line.
-max-line-length=150
 
 # Maximum number of lines in a module.
 max-module-lines=1000
