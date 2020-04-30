@@ -37,7 +37,7 @@ try:
     APP.PREDICTION_DEFINITIONS = json.load(open(FEATURES_DEFINITION_PATH, 'rb'))
     APP.register_blueprint(PREDICTION, url_prefix='/api/prediction')
     APP.register_blueprint(WEIGHTS, url_prefix='/api/weights')
-    raise Exception("Oh oh!!")
+    #raise Exception("Oh oh!!")
 
 except Exception as exc:
     logging.critical('Init error: %s', exc, exc_info=True)
