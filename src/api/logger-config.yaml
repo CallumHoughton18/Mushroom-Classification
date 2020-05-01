@@ -68,4 +68,15 @@ handlers:
 root:
     level: DEBUG
     propagate: no
-    handlers: [wsgi, info_file_handler, error_file_handler, critical_file_handler, debug_file_handler, warn_file_handler]
+    handlers: [wsgi]
+
+loggers:
+    DEBUG:
+        level: DEBUG
+        handlers: [debug_file_handler]
+    BASIC:
+        level: DEBUG
+        handlers: [info_file_handler, warn_file_handler, error_file_handler]
+    FAILURE:
+        level: CRITICAL
+        handlers: [critical_file_handler]

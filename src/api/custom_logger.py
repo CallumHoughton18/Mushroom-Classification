@@ -1,5 +1,6 @@
 """Contains method for setting up application wide logger"""
 from os import path, mkdir
+from enum import Enum
 import logging.config
 import logging
 
@@ -7,7 +8,13 @@ import yaml
 
 from api.helpers import generate_enviroment_variable_yaml_loader
 
-def setup_logging(logger_config_path, log_files_directory, 
+class LoggerType(Enum):
+    """Logger Type Enum to be used to return different configured loggers"""
+    DEBUG = 1
+    BASIC = 2
+    FAILURE = 3
+
+def setup_logging(logger_config_path, log_files_directory,
                   env_var_tag='!ENV', default_level=logging.INFO):
     """
     Set up logger for flask app
@@ -33,3 +40,7 @@ def setup_logging(logger_config_path, log_files_directory,
     else:
         print('Failed to load configuration file. Default config will be used')
         logging.basicConfig(level=default_level)
+
+def get_custom_logger(log_type: LoggerType = LoggerType.DEBUG):
+    """Retrieves logger based on given logger enum name"""
+    return logging.getLogger(log_type.name)
