@@ -1,6 +1,5 @@
 """Contains method for setting up application wide logger"""
 from os import path, mkdir
-import sys
 import logging.config
 import logging
 

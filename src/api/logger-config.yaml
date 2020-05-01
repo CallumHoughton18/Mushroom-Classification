@@ -67,10 +67,5 @@ handlers:
 
 root:
     level: DEBUG
-    handlers: [wsgi]
-
-loggers:
-    FileLogger:
-        level: DEBUG
-        handlers: [info_file_handler, error_file_handler, critical_file_handler, debug_file_handler, warn_file_handler]
-        propogate: yes
+    propagate: no
+    handlers: [wsgi, info_file_handler, error_file_handler, critical_file_handler, debug_file_handler, warn_file_handler]

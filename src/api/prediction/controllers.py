@@ -1,6 +1,5 @@
 """Prediction routes controller"""
 from flask import Blueprint, request, jsonify, current_app as app
-
 from api.custom_route_decorators import validate_prediction_json
 from api.helpers import create_error_response
 from api.prediction.services.user_prediction_service import UserPredictionService
@@ -16,6 +15,7 @@ def index():
 @validate_prediction_json
 def submit():
     """Handles user prediction submission, returns poisonous prediction"""
+    #raise Exception("oops!")
     if not hasattr(request, 'verified_json'):
         return create_error_response("JSON could not be verified", 500)
 
