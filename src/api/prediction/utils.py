@@ -5,7 +5,6 @@ def verify_user_prediction(user_inputs_dic: dict, correct_definition_dic: dict):
     Verifies user prediction json against correct json definition
     returns true if correct format, false if not
     """
-    print(set(correct_definition_dic.keys()).difference(user_inputs_dic.keys()))
 
     if user_inputs_dic.keys() != correct_definition_dic.keys():
         return False
