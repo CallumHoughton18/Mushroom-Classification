@@ -48,7 +48,7 @@ class PredictionControllerTests(unittest.TestCase):
         self.assertEqual(json_data['msg'], 'Could not decode JSON parameter \'values\'')
 
     def test_should_return_true_for_poisonous_values(self):
-        """Should return 200 response with poisonous field set to true"""
+        """Should return 200 response with poisonous field set to True"""
         correct_json = "[{\"cap-shape\":\"c\",\"cap-surface\":\"y\",\"cap-color\":\"e\",\"bruises\":\"f\",\"odor\":\"n\",\"gill-attachment\":\"f\",\"gill-spacing\":\"c\",\"gill-size\":\"n\",\"gill-color\":\"w\",\"stalk-shape\":\"e\",\"stalk-root\":\"b\",\"stalk-surface-above-ring\":\"s\",\"stalk-surface-below-ring\":\"s\",\"stalk-color-above-ring\":\"w\",\"stalk-color-below-ring\":\"w\",\"veil-type\":\"p\",\"veil-color\":\"w\",\"ring-number\":\"t\",\"ring-type\":\"s\",\"spore-print-color\":\"w\",\"population\":\"v\",\"habitat\":\"d\"}]"
 
         res = self.client.get(f'/api/prediction/submit?values={correct_json}')
@@ -56,6 +56,17 @@ class PredictionControllerTests(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(json_data['poisonous'], True)
+
+    def test_should_return_false_for_poisonous_values(self):
+        """Should return 200 response with poisonous field set to False"""
+        #correct_json = "[{\"cap-shape\":\"c\",\"cap-surface\":\"y\",\"cap-color\":\"w\",\"bruises\":\"f\",\"odor\":\"n\",\"gill-attachment\":\"f\",\"gill-spacing\":\"w\",\"gill-size\":\"n\",\"gill-color\":\"n\",\"stalk-shape\":\"e\",\"stalk-root\":\"s\",\"stalk-surface-above-ring\":\"s\",\"stalk-surface-below-ring\":\"s\",\"stalk-color-above-ring\":\"w\",\"stalk-color-below-ring\":\"w\",\"veil-type\":\"u\",\"veil-color\":\"w\",\"ring-number\":\"n\",\"ring-type\":\"n\",\"spore-print-color\":\"n\",\"population\":\"c\",\"habitat\":\"w\"}]"
+        correct_json = "[{\"cap-shape\":\"c\",\"cap-surface\":\"y\",\"cap-color\":\"w\",\"bruises\":\"f\",\"odor\":\"n\",\"gill-attachment\":\"f\",\"gill-spacing\":\"w\",\"gill-size\":\"n\",\"gill-color\":\"n\",\"stalk-shape\":\"e\",\"stalk-root\":\"e\",\"stalk-surface-above-ring\":\"s\",\"stalk-surface-below-ring\":\"s\",\"stalk-color-above-ring\":\"w\",\"stalk-color-below-ring\":\"w\",\"veil-type\":\"p\",\"veil-color\":\"w\",\"ring-number\":\"t\",\"ring-type\":\"n\",\"spore-print-color\":\"n\",\"population\":\"v\",\"habitat\":\"d\"}]"
+
+        res = self.client.get(f'/api/prediction/submit?values={correct_json}')
+        json_data = res.get_json()
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(json_data['poisonous'], False)
 
 if __name__ == '__main__':
     unittest.main()

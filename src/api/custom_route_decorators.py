@@ -12,13 +12,13 @@ def validate_prediction_json(func):
     """validates json in parameter matches expected json from features-definition.json"""
     @wraps(func)
     def decorated_function(*args, **kwargs):
-        user_prediction_json_string = request.args.get('values')
-
+        user_prediction_json_string = request.args.get('values', type=str)
         if user_prediction_json_string is None:
-            raise BadRequest('Missing get parameter: values', 400)
+            raise BadRequest('Missing get parameter: values')
         try:
             prediction_dic = json.loads(user_prediction_json_string)
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as exc:
+            print(exc)
             raise BadRequest('Could not decode JSON parameter \'values\'')
 
         user_predictions_dic = verify_user_prediction(prediction_dic[0], app.PREDICTION_DEFINITIONS)
