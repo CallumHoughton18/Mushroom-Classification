@@ -47,6 +47,5 @@ def get_custom_logger(log_type: LoggerType = LoggerType.DEBUG):
 
 def disable_custom_logging():
     """Disables all custom loggers"""
-    logging.getLogger(LoggerType.BASIC.name).disabled = True
-    logging.getLogger(LoggerType.DEBUG.name).disabled = True
-    logging.getLogger(LoggerType.FAILURE.name).disabled = True
+    for logger_type in LoggerType:
+        logging.getLogger(logger_type.name).disabled = True
