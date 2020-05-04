@@ -44,3 +44,9 @@ def setup_logging(logger_config_path, log_files_directory,
 def get_custom_logger(log_type: LoggerType = LoggerType.DEBUG):
     """Retrieves logger based on given logger enum name"""
     return logging.getLogger(log_type.name)
+
+def disable_custom_logging():
+    """Disables all custom loggers"""
+    logging.getLogger(LoggerType.BASIC.name).disabled = True
+    logging.getLogger(LoggerType.DEBUG.name).disabled = True
+    logging.getLogger(LoggerType.FAILURE.name).disabled = True
