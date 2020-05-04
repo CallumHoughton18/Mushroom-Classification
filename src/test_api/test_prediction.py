@@ -25,14 +25,15 @@ class PredictionControllerTests(unittest.TestCase):
 
     def test_should_return_400_response_if_values_missing_key(self):
         """Should return 400 error message if values JSON missing key from feature-definitions"""
-        dic_with_missing_key = generate_json_with_missing_keys(self.definitions)
-        values_string = json.dumps([dic_with_missing_key])
+        dics_with_missing_key = generate_json_with_missing_keys(self.definitions)
+        for dic in dics_with_missing_key:
+            values_string = json.dumps([dic])
+            
+            res = self.client.get(f'/api/prediction/submit?values={values_string}')
+            json_data = res.get_json()
 
-        res = self.client.get(f'/api/prediction/submit?values={values_string}')
-        json_data = res.get_json()
-
-        self.assertEqual(res.status_code, 400)
-        self.assertEqual(json_data['msg'], 'Given values does not match predictions definition')
+            self.assertEqual(res.status_code, 400)
+            self.assertEqual(json_data['msg'], 'Given values does not match predictions definition')
 
 if __name__ == '__main__':
     unittest.main()
