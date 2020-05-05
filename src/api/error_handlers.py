@@ -9,8 +9,7 @@ def unhandled_exception_handler(error: Exception):
     Handles all uncaught exceptions, should be registered to the app
     upon initialization
     """
-    original = getattr(error, "original_exception", error)
-    get_custom_logger(LoggerType.FAILURE).critical('Unhandled Exception: %s', original)
+    get_custom_logger(LoggerType.FAILURE).critical('Unhandled Exception: %s', error, exc_info=True)
     return create_error_response("Unhandled Internal Server Error...", 500)
 
 def http_error_as_json(error: HTTPException):

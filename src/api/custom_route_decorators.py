@@ -16,16 +16,19 @@ def validate_prediction_json(func):
         if user_prediction_json_string is None:
             raise BadRequest('Missing get parameter: values')
         try:
-            prediction_dic = json.loads(user_prediction_json_string)
+            list_of_prediction_dics = json.loads(user_prediction_json_string)
         except json.JSONDecodeError as exc:
             print(exc)
             raise BadRequest('Could not decode JSON parameter \'values\'')
 
-        user_predictions_dic = verify_user_prediction(prediction_dic[0], app.PREDICTION_DEFINITIONS)
+        if not isinstance(list_of_prediction_dics, list):
+            raise BadRequest('values parameter must be a json array')
+
+        user_predictions_dic = verify_user_prediction(list_of_prediction_dics[0], app.PREDICTION_DEFINITIONS)
         if user_predictions_dic is False:
             raise BadRequest('Given values does not match predictions definition')
 
-        request.verified_json = prediction_dic
+        request.verified_json = list_of_prediction_dics
         return func(*args, **kwargs)
 
     return decorated_function
