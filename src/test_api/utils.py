@@ -5,13 +5,8 @@ def generate_json_with_missing_keys(features_definition: dict):
     mock_requests = []
     def_keys = list(features_definition.keys())
 
-    for i in range(len(def_keys)):
-        mock_request = {}
-        current_keys = def_keys.copy()
-        current_keys.pop(i)
-        for key in current_keys:
-            first_value_in_def = features_definition[key][0]
-            mock_request[key] = first_value_in_def
+    for def_key in def_keys:
+        mock_request = {key: value[0] for key, value in features_definition.items() if key is not def_key}
         mock_requests.append(mock_request)
 
     return mock_requests
@@ -24,14 +19,10 @@ def generate_json_with_incorrect_prediction_value(features_definition: dict):
     mock_requests = []
     def_keys = list(features_definition.keys())
 
-    for i in range(len(def_keys)):
-        mock_request = {}
-        current_keys = def_keys.copy()
-        for key in current_keys:
-            mock_request[key] = features_definition[key][0]
-
-        # Replace one keys value with invalid prediction value
-        mock_request[current_keys[i]] = 'q'
+    for def_key in def_keys:
+        mock_request = {key: value[0] for key, value in features_definition.items()}
+        # Replace given keys, based on enumeration step, value with invalid prediction value
+        mock_request[def_key] = 'q'
         mock_requests.append(mock_request)
 
     return mock_requests

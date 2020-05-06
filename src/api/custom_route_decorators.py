@@ -17,8 +17,7 @@ def validate_prediction_json(func):
             raise BadRequest('Missing get parameter: values')
         try:
             list_of_prediction_dics = json.loads(user_prediction_json_string)
-        except json.JSONDecodeError as exc:
-            print(exc)
+        except json.JSONDecodeError:
             raise BadRequest('Could not decode JSON parameter \'values\'')
 
         if not isinstance(list_of_prediction_dics, list):
