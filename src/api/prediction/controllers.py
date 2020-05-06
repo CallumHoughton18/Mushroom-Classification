@@ -6,11 +6,6 @@ from api.prediction.services.user_prediction_service import UserPredictionServic
 
 PREDICTION = Blueprint('PREDICTION', __name__)
 
-@PREDICTION.route('/')
-def index():
-    """Root test"""
-    return "prediction route"
-
 @PREDICTION.route('/submit')
 @log_request
 @validate_prediction_json

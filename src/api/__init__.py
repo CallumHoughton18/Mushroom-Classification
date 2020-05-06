@@ -7,7 +7,7 @@ import json
 import sys
 
 from flask import Flask
-from werkzeug.exceptions import BadRequest
+from werkzeug.exceptions import BadRequest, NotFound
 import pandas as pd
 
 from api.custom_logger import setup_logging, get_custom_logger, LoggerType
@@ -26,6 +26,7 @@ try:
 
     APP = Flask(__name__)
     APP.register_error_handler(BadRequest, http_error_as_json)
+    APP.register_error_handler(NotFound, http_error_as_json)
     APP.register_error_handler(Exception, unhandled_exception_handler)
 
     MODEL_FILE_PATH = join(CURRENT_MODEL_DIR, 'model.sav')

@@ -3,17 +3,15 @@
 import unittest
 import json
 from os import environ
-import api
 
-from api.custom_logger import disable_custom_logging
 from test_api.utils import generate_json_with_missing_keys, generate_json_with_incorrect_prediction_value
+from test_api.base_test import TestBase
 
-class PredictionControllerTests(unittest.TestCase):
+class PredictionControllerTests(TestBase):
     """Contains integration tests for prediction controller"""
+
     def setUp(self):
-        disable_custom_logging()
-        api.APP.testing = True
-        self.client = api.APP.test_client()
+        super(PredictionControllerTests, self).setUp()
         feature_definition_path = environ.get('FEATURE_DEFINITION_PATH')
         self.definitions = json.load(open(feature_definition_path, 'rb'))
 
