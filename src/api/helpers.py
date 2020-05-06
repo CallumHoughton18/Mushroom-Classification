@@ -11,6 +11,7 @@ def create_error_response(msg, status_code: int):
 
 def generate_enviroment_variable_yaml_loader(tag):
     """Generates loader, to handle given tag in yaml"""
+    # Pattern for matching {ANY_WORD_HERE}
     pattern = re.compile('.*?\\${(\\w+)}.*?')
     loader = yaml.SafeLoader
 
@@ -22,6 +23,7 @@ def generate_enviroment_variable_yaml_loader(tag):
         """
         value = loader.construct_scalar(node)
         match = pattern.findall(value)  # to find all env variables in line
+
         if match:
             full_value = value
             for env_var in match:
@@ -29,6 +31,7 @@ def generate_enviroment_variable_yaml_loader(tag):
                     f'${{{env_var}}}', environ.get(env_var, env_var)
                 )
             return full_value
+
         return value
 
     loader.add_constructor(tag, constructor_env_variables)
