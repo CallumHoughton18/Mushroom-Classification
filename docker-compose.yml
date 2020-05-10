@@ -3,10 +3,10 @@ version: '3.8'
 services:
   web:
     build: ./src
-    command: flask run
+    command: python manage.py run -h 0.0.0.0
     volumes:
       - ./src/:/usr/app/
     ports:
       - 5000:5000
     env_file:
-      #- ./.env.dev
+      - ./.env.dev

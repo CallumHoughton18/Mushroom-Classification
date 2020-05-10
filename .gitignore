@@ -38,3 +38,4 @@ share/python-wheels/
 *.egg
 MANIFEST
 src/logs
+.env.dev

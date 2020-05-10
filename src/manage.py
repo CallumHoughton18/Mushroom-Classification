@@ -1,5 +1,9 @@
 """Used to run the development server"""
+from flask.cli import FlaskGroup
+
 from api import APP
 
+CLI = FlaskGroup(APP)
+
 if __name__ == "__main__":
-    APP.run(host='0.0.0.0', port=5000, debug=True)
+    CLI()
