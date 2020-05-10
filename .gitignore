@@ -39,3 +39,4 @@ share/python-wheels/
 MANIFEST
 src/logs
 .env*
+nginx/nginx.conf

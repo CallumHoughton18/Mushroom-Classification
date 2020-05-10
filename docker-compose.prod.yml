@@ -1,12 +1,19 @@
 version: '3.8'
 
 services:
-  web:
+  web_api:
     build: ./src
     command: gunicorn --bind 0.0.0.0:5000 manage:APP
     volumes:
       - ./src/:/usr/app/
-    ports:
-      - 5000:5000
+    expose:
+      - 5000
     env_file:
       - ./.env.prod
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - web_api
