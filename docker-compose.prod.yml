@@ -9,7 +9,9 @@ services:
     expose:
       - 5000
     env_file:
-      - ./.env.prod
+      - ./.docker.env
+    environment:
+      - FLASK_ENV=production
 
   nginx:
     build: ./nginx

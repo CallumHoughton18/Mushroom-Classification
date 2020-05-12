@@ -9,4 +9,6 @@ services:
     ports:
       - 5000:5000
     env_file:
-      - ./.env.dev
+      - ./.docker.env
+    environment:
+      - FLASK_ENV=development
