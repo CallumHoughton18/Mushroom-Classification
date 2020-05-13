@@ -1,3 +1,5 @@
-*/env/*
-*/logs/*
-*/trained_models/*
+*env/
+*logs/
+*api_logs/
+*trained_models/
+*__pycache__/

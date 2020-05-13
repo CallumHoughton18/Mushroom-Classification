@@ -4,8 +4,6 @@ services:
   web_api:
     build: ./src
     command: gunicorn --bind 0.0.0.0:5000 manage:APP
-    volumes:
-      - ./src/:/usr/app/
     expose:
       - 5000
     env_file:

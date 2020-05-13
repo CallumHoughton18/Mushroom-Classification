@@ -2,15 +2,14 @@ FROM python:3.7.5-slim-buster
 
 MAINTAINER Callum Houghton "Callum.Houghton13@hotmail.co.uk"
 
-WORKDIR /usr/app
+WORKDIR /app
 
 # Prevents .pyc files written to disc
 ENV PYTHONDONTWRITEBYTECODE 1
 # Prevrnts buffering of stdout and stderror
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install --upgrade pip
-COPY ./requirements.txt /usr/app/requirements.txt
-RUN pip install -r requirements.txt
+COPY . /app
 
-copy . /usr/app
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
