@@ -6,7 +6,7 @@ The model is trained using a combination of logistic regression and gradient des
 
 The idea was then to expose this model via a minimalist RESTful API, but focusing on best practices for API development.
 
-The Python implementation purposely only uses NumPy and Pandas for linear algebra and data manipulation, this project contains **NO DEPENDENCY ON MACHINE LEARNING LIBRARIES** as the purpose was to implement logistic regression from scratch, rather than provide an efficient scalable solution for the machine learning model.
+The Python implementation purposely only uses NumPy and Pandas for linear algebra and data manipulation, this project contains **NO DEPENDENCY ON MACHINE LEARNING LIBRARIES** as the purpose was to implement logistic regression from scratch, rather than provide an efficient scalable solution for the machine learning model and training.
 
 # Octave Prototype
 
@@ -24,11 +24,11 @@ A virtual environment should be used to work on the project, in the `src` folder
 
 ## mushroom_classifier Module Setup and Description
 
-Absolute paths need to be set as environment variables for the `train.py` script within the `mushroom_classifier` module to work and export the models to the `trained_models` and `current_model` directories, the required environment variables are:
+Paths need to be set as environment variables for the `train.py` script within the `mushroom_classifier` module to work and export the models to the `trained_models` and `current_model` directories, the required environment variables are:
 
-`export DATASET_DIR=ABSOLUTE-PATH-TO-DATASET-FOLDER(ie the files folder in this project)`
-`export CURRENT_MODEL_DIR=ABSOLUTE-PATH-TO-CURRENT-MODEL-FOLDER`
-`export TRAINED_MODELS_DIR=ABSOLUTE-PATH-TO-TRAINED-MODEL-FOLDER`
+`export DATASET_DIR=PATH-TO-DATASET-FOLDER(ie the files folder in this project)`
+`export CURRENT_MODEL_DIR=PATH-TO-CURRENT-MODEL-FOLDER`
+`export TRAINED_MODELS_DIR=PATH-TO-TRAINED-MODEL-FOLDER`
 
 To use the provided dataset in this repository set the `DATASET_DIR` environment variable to the absolute path of the `files` folder, as to correctly run the `train.py` script a `mushrooms.csv` file and `unseen_mushrooms.csv` file need to be present in the `DATASET_DIR` directory.
 
@@ -42,24 +42,24 @@ The workflow currently, is to train the model and store it, with the relevant co
 
 If the currently trained model has a high enough accuracy, and correctly predicts the completely known examples as specified in the `unseen_mushrooms.csv` file, this model and all its files will be exported and overwrite anything in the current model directory, as specified by the `CURRENT_MODEL_DIR` environment variable.
 
-## api Module Setup and Description
+## Flask API Module Setup and Description
 
-The model contained within the directory specified by the `CURRENT_MODEL_DIR` environment variable can be exposed via a RESTful Web Service using Flask. 
+The model contained within the directory specified by the `CURRENT_MODEL_DIR` environment variable can be exposed via a RESTful Web Service using Flask, this application is in the `src/api` folder.
 
 The API also requires the path to the features definition .json file specified via a environment variable:
-`export FEATURE_DEFINITION_PATH=ABSOLUTE-PATH-TO-DEFINITION-FILE`
+`export FEATURE_DEFINITION_PATH=PATH-TO-DEFINITION-FILE`
 
 This definition file, `features-definition.json` within the `src/api` directory, contains all possible keys and allowed values for making predictions against the model.
 
 The API also makes use of logging to log files, the directory for these logs files is specified via an environment variable:
 
-`export LOGS_DIRECTORY=ABSOLUTE-PATH-TO-LOG-FILE-DIRECTORY`
+`export LOGS_DIRECTORY=PATH-TO-LOG-FILE-DIRECTORY`
 
 The flask app can also be run by directly serving the `run.py` file or the `FLASK_APP` environment variable can be set to the absolute path of the `run.py` file:
 
-`export FLASK_APP=ABSOLUTE-PATH-TO-RUN.PY-FILE`
+`export FLASK_APP=PATH-TO-RUN.PY-FILE`
 
-Then the flask api can be ran using the `Flask Run` command
+Then the flask API can be ran using the from within the src folder with the command `python manage.py src`
 
 The flask app environment can also be specified via the environment command:
 
@@ -74,3 +74,12 @@ For example, using the url:
 The above URL how the mushroom attributes are added as JSON key values pairs to the JSON object within the 'values' JSON array. The response for this call will also be JSON, with a Poisonous key containing a value True or False depending on the models prediction.
 
 Tests for the API are available within the `test_api`module.
+
+## Docker Containers
+
+The Flask API is also containerized for both production and development using Docker and the accompanying `docker-compose-prod.yml` and `docker-compose.yml` files in the root of the project.
+
+The production yml file uses nginx as the web server and gunicorn as the WSGI server to the serve the application.
+
+For information on how to use [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) consult the documentation.
+
