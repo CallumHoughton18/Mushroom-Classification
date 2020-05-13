@@ -6,7 +6,7 @@ from logging import getLogger
 import json
 import sys
 
-from flask import Flask
+from flask import Flask, send_from_directory
 from werkzeug.exceptions import BadRequest, NotFound
 import pandas as pd
 
@@ -32,6 +32,9 @@ try:
     MODEL_FILE_PATH = join(CURRENT_MODEL_DIR, 'model.sav')
     COLUMNS_FILE_PATH = join(CURRENT_MODEL_DIR, 'columns_for_index.sav')
     FEATURES_DEFINITION_PATH = environ.get('FEATURE_DEFINITION_PATH')
+    # send_from_directory from Flask doesn't like relative paths
+    # So relative path is converted to its absolute path
+    STATIC_FILES_PATH = abspath(environ.get('DATASET_DIR'))
 
     APP.MODEL = load(open(MODEL_FILE_PATH, 'rb'))
     # Datacleaner doesn't need dataset for prediction when model loaded, so None can be passed in
@@ -43,7 +46,12 @@ try:
     APP.register_blueprint(PREDICTION, url_prefix='/api/prediction')
     APP.register_blueprint(WEIGHTS, url_prefix='/api/weights')
 
+    @APP.route("/api/files/<path:filename>")
+    def staticfiles(filename):
+        """Route for serving static files from the files directory"""
+        return send_from_directory(STATIC_FILES_PATH, filename)
+
 except Exception as exc:
+    # Initialisation has failed, so rethrow exception
     get_custom_logger(LoggerType.FAILURE).critical('App Startup Error: %s', exc, exc_info=True)
-    # Initialisation as failed, so rethrow exception
     raise exc
