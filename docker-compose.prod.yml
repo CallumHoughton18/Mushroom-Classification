@@ -4,6 +4,8 @@ services:
   web_api:
     build: ./src
     command: gunicorn --bind 0.0.0.0:5000 manage:APP
+    volumes:
+      - static_volume:/app/files
     expose:
       - 5000
     env_file:
@@ -13,7 +15,12 @@ services:
 
   nginx:
     build: ./nginx
+    volumes:
+      - static_volume:/app/files
     ports:
       - 1337:80
     depends_on:
       - web_api
+
+volumes:
+  static_volume:

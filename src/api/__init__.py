@@ -49,6 +49,8 @@ try:
     @APP.route("/api/files/<path:filename>")
     def staticfiles(filename):
         """Route for serving static files from the files directory"""
+        # This is purely done for flask dev server, in production static files
+        # should be served by the web server, e.g nginx.
         return send_from_directory(STATIC_FILES_PATH, filename)
 
 except Exception as exc:
