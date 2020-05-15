@@ -42,3 +42,4 @@ api_logs
 .env*
 nginx/nginx.conf
 .docker.env
+nosetests.xml

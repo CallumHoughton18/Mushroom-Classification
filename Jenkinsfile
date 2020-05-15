@@ -17,11 +17,23 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh 'python -m unittest discover -s src'
+        sh 'nosetests --with-xunit'
+        sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
       }   
     }
     stage('deploy') {
-      
+
+    }
+  }
+  post {
+    always {
+      junit '**/nosetests.xml'
+    }
+    success {
+      mail to: callum.houghton13@hotmail.co.uk, subject: '[PASS] Mushroom API Pipeline'
+    }
+    failure {
+      mail to: callum.houghton13@hotmail.co.uk, subject: '[FAIL] Mushroom API Pipeline'
     }
   }
 }
