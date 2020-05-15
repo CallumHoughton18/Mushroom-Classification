@@ -45,6 +45,7 @@ class TrainingTests(TestBase):
         self.assertTrue(len(costs) == test_iters,
                         f'Costs amount expected:{test_iters}, actual {len(costs)}')
 
+    # pylint: disable=R0201
     def mock_log(self):
         """Mock log method"""
         return None

@@ -9,6 +9,7 @@ import numpy as np
 from mushroom_classifier.gradientdescent import GradientDescent
 from test_mushroom_classifier.base_test import TestBase
 
+# pylint: disable=R0201
 class GradientDescentTests(TestBase):
     """GradientDescent tests"""
     def mock_cost_function(self, hyp, y_vector):

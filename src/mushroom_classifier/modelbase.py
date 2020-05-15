@@ -24,6 +24,7 @@ class ModelBase(ABC):
     def train(self, x_matrix, y_vector):
         """Hypothesis astract method"""
 
+    # pylint: disable=R0201
     def add_intercept(self, x_matrix):
         """Returns x_matrix with intercept added"""
         return add_intercept(x_matrix)
