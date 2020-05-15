@@ -21,19 +21,16 @@ pipeline {
         sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
       }   
     }
-    stage('deploy') {
-
-    }
   }
   post {
     always {
       junit '**/nosetests.xml'
     }
     success {
-      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[PASS] Mushroom API Pipeline'
+      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[PASS] Mushroom API Pipeline', body: "Jenkins Test Output"
     }
     failure {
-      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[FAIL] Mushroom API Pipeline'
+      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[FAIL] Mushroom API Pipeline', body: "Jenkins Test Output"
     }
   }
 }
