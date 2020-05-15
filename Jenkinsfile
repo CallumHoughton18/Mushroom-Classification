@@ -1,7 +1,7 @@
 pipeline {
   agent { docker { image 'python:3.7.5-slim-buster' } }
   environment {
-    FLASK_ENV=development
+    FLASK_ENV='development'
     FLASK_APP='./src/api/__init__.py'
     DATASET_DIR='./src/files'
     CURRENT_MODEL_DIR='./src/current_model'
