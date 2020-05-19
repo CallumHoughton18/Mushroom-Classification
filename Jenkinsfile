@@ -27,10 +27,10 @@ pipeline {
       junit '**/nosetests.xml'
     }
     success {
-      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[PASS] Mushroom API Pipeline', body: ""
+      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[PASS] Mushroom API Pipeline', body: "Test Body"
     }
     failure {
-      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[FAIL] Mushroom API Pipeline', body: ""
+      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[FAIL] Mushroom API Pipeline', body: "Test Body"
     }
   }
 }
