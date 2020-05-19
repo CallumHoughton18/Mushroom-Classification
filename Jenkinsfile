@@ -18,8 +18,15 @@ pipeline {
     stage('test') {
       steps {
         sh 'nosetests --with-xunit'
-        sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
+        //sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
       }   
+    }
+    stage('deploy') {
+      withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginx-conf'),
+                 file(credentialsId: 'docker-env-file', variable: 'docker-env')]) {
+                   sh "cp \$nginx-conf ./nginx/nginx.conf"
+                   sh "cp \$docker-env ./.docker.env"
+                   }
     }
   }
   post {
