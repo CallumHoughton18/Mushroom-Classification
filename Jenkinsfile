@@ -22,11 +22,13 @@ pipeline {
       }   
     }
     stage('deploy') {
-      withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginx-conf'),
-                 file(credentialsId: 'docker-env-file', variable: 'docker-env')]) {
-                   sh "cp \$nginx-conf ./nginx/nginx.conf"
+      steps {
+        withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginx-conf'),
+        file(credentialsId: 'docker-env-file', variable: 'docker-env')]) {
+          sh "cp \$nginx-conf ./nginx/nginx.conf"
                    sh "cp \$docker-env ./.docker.env"
                    }
+      }
     }
   }
   post {
