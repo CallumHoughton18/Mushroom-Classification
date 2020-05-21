@@ -13,7 +13,6 @@ pipeline {
     stage('build') {
       steps {
         sh 'pip install -r src/requirements.txt'
-        sh 'python src/manage.py run'
       }
     }
     stage('test') {
