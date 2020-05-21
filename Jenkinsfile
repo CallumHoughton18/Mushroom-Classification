@@ -11,6 +11,7 @@ pipeline {
   }
   stages {
     stage('build') {
+      agent { docker { image 'python:3.7.5-slim-buster' } }
       steps {
         sh 'pip install -r src/requirements.txt'
       }
