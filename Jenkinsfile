@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker { image 'python:3.7.5-slim-buster' } }
+  agent { docker { image 'python:3.7.5' } }
   environment {
     FLASK_ENV='development'
     FLASK_APP='./src/api/__init__.py'
