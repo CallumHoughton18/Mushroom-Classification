@@ -25,12 +25,16 @@ pipeline {
     stage('push') {
       steps {
         def apiImage = docker.build("mushroom-api", "./src")
-        apiImage.push("latest")
-        withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginxconf'),
-        file(credentialsId: 'docker-env-file', variable: 'dockerenv')]) {
-          sh "cp \$nginxconf ./nginx/nginx.conf"
-                   sh "cp \$dockerenv ./.docker.env"
-                   }
+
+        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+        // withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginxconf'),
+        // file(credentialsId: 'docker-env-file', variable: 'dockerenv')]) {
+        //   sh "cp \$nginxconf ./nginx/nginx.conf"
+        //            sh "cp \$dockerenv ./.docker.env"
+        //            }
       }
     }
   }
