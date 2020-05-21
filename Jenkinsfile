@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker { image 'python:3.7.5' } }
+  agent any
   environment {
     FLASK_ENV='development'
     FLASK_APP='./src/api/__init__.py'
@@ -22,7 +22,6 @@ pipeline {
       }   
     }
     stage('push') {
-      agent none
       steps {
         echo 'Building and Pushing API Image to DockerHub'
         script {
