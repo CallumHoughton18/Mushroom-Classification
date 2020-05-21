@@ -13,6 +13,7 @@ pipeline {
     stage('build') {
       steps {
         sh 'pip install -r src/requirements.txt'
+        sh 'python src/manage.py run'
       }
     }
     stage('test') {
@@ -21,8 +22,10 @@ pipeline {
         //sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
       }   
     }
-    stage('deploy') {
+    stage('push') {
       steps {
+        def apiImage = docker.build("mushroom-api", "./src")
+        apiImage.push("latest")
         withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginxconf'),
         file(credentialsId: 'docker-env-file', variable: 'dockerenv')]) {
           sh "cp \$nginxconf ./nginx/nginx.conf"

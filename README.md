@@ -59,7 +59,7 @@ The flask app can also be run by directly serving the `run.py` file or the `FLAS
 
 `export FLASK_APP=PATH-TO-RUN.PY-FILE`
 
-Then the flask API can be ran using the from within the src folder with the command `python manage.py src`
+Then the flask API can be ran using the from within the src folder with the command `python manage.py run`
 
 The flask app environment can also be specified via the environment command:
 
