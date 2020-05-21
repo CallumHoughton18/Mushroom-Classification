@@ -23,7 +23,7 @@ pipeline {
       }   
     }
     stage('push') {
-      apiImage = docker.build("mushroom-api", "./src")
+      def apiImage = docker.build("mushroom-api", "./src")
 
       docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
           apiImage.push("${env.BUILD_NUMBER}")
