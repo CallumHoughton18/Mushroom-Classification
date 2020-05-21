@@ -22,7 +22,7 @@ pipeline {
       }   
     }
     stage('push') {
-      agent any
+      agent none
       steps {
         echo 'Building and Pushing API Image to DockerHub'
         script {
