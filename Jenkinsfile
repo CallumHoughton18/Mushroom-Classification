@@ -37,6 +37,9 @@ pipeline {
 
     stage('push') {
       agent{ label 'master' }
+      when {
+        branch 'master'
+      }
       steps {
         echo 'Building and Pushing API Image to DockerHub'
         script {
