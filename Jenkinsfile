@@ -29,6 +29,11 @@ pipeline {
           }   
         }
       }
+      post {
+        always {
+          junit '**/nosetests.xml'
+        }
+      }
     }
 
     stage('push') {
@@ -50,15 +55,17 @@ pipeline {
         }
     }
   }
+
   post {
-    always {
-      junit '**/nosetests.xml'
-    }
     success {
-      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[PASS] Mushroom API Pipeline', body: "Test Body"
+      node('master') {
+        mail to: 'callum.houghton13@hotmail.co.uk', subject: '[PASS] Mushroom API Pipeline', body: "Test Body"
+      }
     }
     failure {
-      mail to: 'callum.houghton13@hotmail.co.uk', subject: '[FAIL] Mushroom API Pipeline', body: "Test Body"
+      node('master') {
+        mail to: 'callum.houghton13@hotmail.co.uk', subject: '[FAIL] Mushroom API Pipeline', body: "Test Body"
+      }
     }
   }
 }
