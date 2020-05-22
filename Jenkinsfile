@@ -56,13 +56,9 @@ pipeline {
   post {
     always {
       node('master') {
-        steps {
-          script {
-            withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
-              emailext to: $'EMAIL'
-            }   
-          }
-        }   
+        withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
+          emailext( to: $'EMAIL')
+        }
       }
     }
   }
