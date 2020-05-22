@@ -1,5 +1,11 @@
 pipeline {
-  agent { docker { image 'python:3.7.5-slim-buster' } }
+  agent { 
+    docker { 
+      label 'docker'
+      image 'python:3.7.5-slim-buster' 
+    } 
+  }
+
   environment {
     FLASK_ENV='development'
     FLASK_APP='./src/api/__init__.py'
@@ -9,6 +15,7 @@ pipeline {
     FEATURE_DEFINITION_PATH='./src/api/features-definition.json'
     LOGS_DIRECTORY='./src/api_logs'
   }
+  
   stages {
     stage('build') {
       steps {
