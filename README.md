@@ -1,5 +1,9 @@
 # Mushroom Classification Model and API
 
+##### Master Branch Build Status:
+
+[![Build Status](http://68.183.37.154:8080/job/Mushroom-Classification-API/job/master/1/badge/icon)](http://68.183.37.154:8080/job/Mushroom-Classification-API/job/master/1/)
+
 A project, prototyped in Octave and implemented in Python, to use machine learning to classify a mushroom as poisonous/edible using the mushroom dataset from the UCI Machine Learning repository which can be viewed [here](https://www.kaggle.com/uciml/mushroom-classification).
 
 The model is trained using a combination of logistic regression and gradient descent as minimisation method.
