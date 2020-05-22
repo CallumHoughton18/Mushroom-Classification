@@ -16,14 +16,6 @@ pipeline {
   }
   
   stages {
-    stage ('initialize') {
-      steps {
-        script {
-          def dockerHome = tool 'docker'
-          env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
-      }
-    }
     stage('build') {
       steps {
         sh 'pip install -r src/requirements.txt'
@@ -36,6 +28,7 @@ pipeline {
       }   
     }
     stage('push') {
+      agent{ label 'master' }
       steps {
         echo 'Building and Pushing API Image to DockerHub'
         script {
