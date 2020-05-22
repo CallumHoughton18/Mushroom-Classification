@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker { image 'python:3.7.5-slim-buster' } }
+  //agent { docker { image 'python:3.7.5-slim-buster' } }
   agent none
 
   environment {
@@ -13,19 +13,21 @@ pipeline {
   }
   
   stages {
-    
+
     stage('build and test') {
       agent { docker { image 'python:3.7.5-slim-buster' } }
-      stage('build') {
-        steps {
-          sh 'pip install -r src/requirements.txt'
+      stages {
+        stage('build') {
+          steps {
+            sh 'pip install -r src/requirements.txt'
+          }
         }
-      }
-      stage('test') {
-        steps {
-          sh 'nosetests --with-xunit'
-          //sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
-        }   
+        stage('test') {
+          steps {
+            sh 'nosetests --with-xunit'
+            //sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
+          }   
+        }
       }
     }
 
