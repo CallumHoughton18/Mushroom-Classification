@@ -42,12 +42,12 @@ pipeline {
         echo 'Building and Pushing API Image to DockerHub'
         script {
           withCredentials([string(credentialsId: 'dockerhub-repo', variable: 'REPO')]) {
-          }
-          def apiImage = docker.build("${REPO}", "./src")
-          docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
-            apiImage.push("${env.BUILD_NUMBER}")
-            apiImage.push("latest")
+            def apiImage = docker.build("${REPO}", "./src")
+            docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+              apiImage.push("${env.BUILD_NUMBER}")
+              apiImage.push("latest")
             }
+          }
         }
         // withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginxconf'),
         // file(credentialsId: 'docker-env-file', variable: 'dockerenv')]) {
