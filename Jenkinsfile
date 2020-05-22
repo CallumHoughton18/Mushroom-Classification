@@ -57,7 +57,7 @@ pipeline {
     always {
       node('master') {
         withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
-          emailext( to: "${EMAIL}", body: "test body", subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}")
+          emailext( to: "${EMAIL}", body: "test body", subject: "[${currentBuild.currentResult}] ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER}")
         }
       }
     }
