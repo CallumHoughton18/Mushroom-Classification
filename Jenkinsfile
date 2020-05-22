@@ -57,7 +57,7 @@ pipeline {
     always {
       node('master') {
         withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
-          emailext( to: $'EMAIL')
+          emailext( to: "${EMAIL}")
         }
       }
     }
