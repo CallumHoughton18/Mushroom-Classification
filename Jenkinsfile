@@ -1,5 +1,6 @@
 pipeline {
-  agent any
+  agent { docker { image 'python:3.7.5-slim-buster' } }
+  agent none
 
   environment {
     FLASK_ENV='development'
@@ -12,18 +13,22 @@ pipeline {
   }
   
   stages {
-    stage('build') {
+    
+    stage('build and test') {
       agent { docker { image 'python:3.7.5-slim-buster' } }
-      steps {
-        sh 'pip install -r src/requirements.txt'
+      stage('build') {
+        steps {
+          sh 'pip install -r src/requirements.txt'
+        }
+      }
+      stage('test') {
+        steps {
+          sh 'nosetests --with-xunit'
+          //sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
+        }   
       }
     }
-    stage('test') {
-      steps {
-        sh 'nosetests --with-xunit'
-        //sh 'pylint --rcfile src/.pylintrc --exit-zero src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier'
-      }   
-    }
+
     stage('push') {
       agent{ label 'master' }
       steps {
