@@ -49,24 +49,16 @@ pipeline {
             }
           }
         }
-        // withCredentials([file(credentialsId: 'nginx-conf-file', variable: 'nginxconf'),
-        // file(credentialsId: 'docker-env-file', variable: 'dockerenv')]) {
-        //   sh "cp \$nginxconf ./nginx/nginx.conf"
-        //            sh "cp \$dockerenv ./.docker.env"
-        //            }
-        }
+      }
     }
   }
 
   post {
-    success {
+    always {
       node('master') {
-        mail to: 'callum.houghton13@hotmail.co.uk', subject: '[PASS] Mushroom API Pipeline', body: "Test Body"
-      }
-    }
-    failure {
-      node('master') {
-        mail to: 'callum.houghton13@hotmail.co.uk', subject: '[FAIL] Mushroom API Pipeline', body: "Test Body"
+        withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
+          emailext to: $'EMAIL'
+        }      
       }
     }
   }
