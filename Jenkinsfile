@@ -1,7 +1,6 @@
 pipeline {
   agent { 
     docker { 
-      label 'docker'
       image 'python:3.7.5-slim-buster' 
     } 
   }
@@ -17,6 +16,14 @@ pipeline {
   }
   
   stages {
+    stage ('initialize') {
+      steps {
+        script {
+          def dockerHome = tool 'docker'
+          env.PATH = "${dockerhome}/bin:${env.PATH}"
+        }
+      }
+    }
     stage('build') {
       steps {
         sh 'pip install -r src/requirements.txt'
