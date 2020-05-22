@@ -1,5 +1,4 @@
 pipeline {
-  //agent { docker { image 'python:3.7.5-slim-buster' } }
   agent none
 
   environment {
@@ -57,7 +56,9 @@ pipeline {
     always {
       node('master') {
         withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
-          emailext( to: "${EMAIL}", body: "${env.BUILD_URL}", subject: "[${currentBuild.currentResult}] ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER}")
+          emailext( to: "${EMAIL}", body: "${env.BUILD_URL}", 
+                    subject: "[${currentBuild.currentResult}] ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER}",
+                    attachLog: true)
         }
       }
     }
