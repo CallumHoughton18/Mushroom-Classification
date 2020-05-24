@@ -16,9 +16,6 @@ class LoggerType(Enum):
 
 def setup_logging(logger_config_path, log_files_directory,
                   env_var_tag='!ENV', default_level=logging.INFO):
-    """
-    Set up logger for flask app
-    """
 
     if not path.exists(log_files_directory):
         try:
