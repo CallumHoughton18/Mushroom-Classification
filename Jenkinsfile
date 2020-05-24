@@ -77,6 +77,7 @@ pipeline {
                     attachLog: true)
         }
         deleteDir()
+        sh 'docker system prune -a'
       }
     }
   }
