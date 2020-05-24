@@ -61,7 +61,7 @@ pipeline {
               apiImage.push("${env.BUILD_NUMBER}")
               apiImage.push("latest")
             }
-            
+
             sh "docker rmi ${apiImage.id} -f"
           }
         }
@@ -79,7 +79,7 @@ pipeline {
                     attachLog: true)
         }
         deleteDir()
-        sh 'docker system prune -a'
+        sh 'docker system prune -a -f'
       }
     }
   }
