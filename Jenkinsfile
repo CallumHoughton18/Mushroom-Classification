@@ -30,7 +30,9 @@ pipeline {
       }
       post {
         always {
-          junit '**/nosetests.xml'
+          script {
+            env.SUMMARY = junit testResults: '**/nosetests.xml'
+          }
           recordIssues(
             enabledForFailure: false, 
             tool: pyLint(pattern: 'pylint.log'),
@@ -63,7 +65,8 @@ pipeline {
     always {
       node('master') {
         withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
-          emailext( to: "${EMAIL}", body: "${env.BUILD_URL}", 
+          emailext( to: "${EMAIL}", 
+                    body: "*Test Summary* - ${env.SUMMARY.totalCount}, Failures: ${env.SUMMARY.failCount}, Skipped: ${env.SUMMARY.skipCount}, Passed: ${env.SUMMARY.passCount}\n${env.BUILD_URL}", 
                     subject: "[${currentBuild.currentResult}] ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER}",
                     attachLog: true)
         }
