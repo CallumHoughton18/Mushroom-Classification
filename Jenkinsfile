@@ -1,3 +1,5 @@
+def summary
+
 pipeline {
   agent none
 
@@ -31,7 +33,7 @@ pipeline {
       post {
         always {
           script {
-            env.SUMMARY = junit testResults: '**/nosetests.xml'
+            summary = junit testResults: '**/nosetests.xml'
           }
           recordIssues(
             enabledForFailure: false, 
@@ -66,7 +68,7 @@ pipeline {
       node('master') {
         withCredentials([string(credentialsId: 'sendto-email', variable: 'EMAIL')]) {
           emailext( to: "${EMAIL}", 
-                    body: "*Test Summary* - ${env.SUMMARY.totalCount}, Failures: ${env.SUMMARY.failCount}, Skipped: ${env.SUMMARY.skipCount}, Passed: ${env.SUMMARY.passCount}\n${env.BUILD_URL}", 
+                    body: "*Test Summary* - ${summary.totalCount}, Failures: ${summary.failCount}, Skipped: ${summary.skipCount}, Passed: ${summary.passCount}\n${env.BUILD_URL}", 
                     subject: "[${currentBuild.currentResult}] ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER}",
                     attachLog: true)
         }
