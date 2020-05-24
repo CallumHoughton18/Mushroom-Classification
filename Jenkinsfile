@@ -31,6 +31,9 @@ pipeline {
       post {
         always {
           junit '**/nosetests.xml'
+          recordIssues(
+            enabledForFailure: false, 
+            tool: java(pattern: 'pylint.log'))
         }
       }
     }
