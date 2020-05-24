@@ -61,6 +61,8 @@ pipeline {
               apiImage.push("${env.BUILD_NUMBER}")
               apiImage.push("latest")
             }
+            
+            sh "docker rmi ${apiImage.id} -f"
           }
         }
       }
