@@ -33,7 +33,8 @@ pipeline {
           junit '**/nosetests.xml'
           recordIssues(
             enabledForFailure: false, 
-            tool: java(pattern: 'pylint.log'))
+            tool: pyLint(pattern: 'pylint.log')),
+            unstableTotalAll: 1
         }
       }
     }
