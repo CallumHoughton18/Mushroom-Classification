@@ -76,10 +76,8 @@ pipeline {
                     subject: "[${currentBuild.currentResult}] ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER}",
                     attachLog: true)
         }
+        deleteDir()
       }
-    }
-    cleanup {
-      deleteDir()
     }
   }
 }
