@@ -2,7 +2,9 @@ def summary
 
 pipeline {
   agent none
-
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+  }
   environment {
     FLASK_ENV='development'
     FLASK_APP='./src/api/__init__.py'
@@ -14,7 +16,6 @@ pipeline {
   }
   
   stages {
-
     stage('build and test') {
       agent { docker { image 'python:3.7.5-slim-buster' } }
       stages {
@@ -39,6 +40,9 @@ pipeline {
             enabledForFailure: false, 
             tool: pyLint(pattern: 'pylint.log'),
             unstableTotalAll: 1)
+        }
+        cleanup {
+          deleteDir()
         }
       }
     }
@@ -73,6 +77,9 @@ pipeline {
                     attachLog: true)
         }
       }
+    }
+    cleanup {
+      deleteDir()
     }
   }
 }
