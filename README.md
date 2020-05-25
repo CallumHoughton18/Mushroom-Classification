@@ -106,7 +106,7 @@ For the production docker-compose file an `nginx.conf` file needs to be present 
 ## Jenkins CD/CI
 
 The project is configured for a CD/CI Pipeline via Jenkins 2.0, the 'pipeline as code' as available in the root `jenkinsfile`. 
-**The Jenkins server must have the initial recommended plugins when installing Jenkins, as well as the Warnings Next Generation plugin.**
+**The Jenkins server must have the initial recommended plugins when installing Jenkins, as well as the Warnings Next Generation plugin and the Cobertura plugin.**
 
 Credentials also need to be configured for the pipeline. Which credentials, and of what type, can be easily seen via the `withCredentials` blocks.
 
