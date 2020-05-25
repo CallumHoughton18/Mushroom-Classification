@@ -43,4 +43,6 @@ api_logs
 nginx/nginx.conf
 .docker.env
 nosetests.xml
+results.xml
 pylint.log
+.coverage
