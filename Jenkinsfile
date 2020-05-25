@@ -27,6 +27,7 @@ pipeline {
         stage('test') {
           steps {
             sh 'coverage run -m py.test -o junit_family=xunit2 --junitxml results.xml'
+            sh 'coverage xml'
             sh 'pylint --rcfile src/.pylintrc --exit-zero --output-format=parseable --reports=no src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier > pylint.log'
           }   
         }
