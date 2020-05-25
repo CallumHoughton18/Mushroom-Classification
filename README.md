@@ -1,8 +1,8 @@
 # Mushroom Classification Model and API
 
-##### Master Branch Build Status:
-
-[![Build Status](http://68.183.37.154:8080/buildStatus/icon?job=Mushroom-Classification-API%2Fmaster&build=1)](http://68.183.37.154:8080/job/Mushroom-Classification-API/job/master/1/)
+|                                                              |                                                              |                                                              |                                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Jenkins](https://img.shields.io/jenkins/build?jobUrl=http%3A%2F%2F68.183.37.154%3A8080%2Fjob%2Fmushroom-classification-api%2Fjob%2Fmaster%2F) | ![Jenkins tests](https://img.shields.io/jenkins/tests?compact_message&failed_label=failed&jobUrl=http%3A%2F%2F68.183.37.154%3A8080%2Fjob%2Fmushroom-classification-api%2Fjob%2Fmaster%2F&passed_label=passed) | ![Jenkins Coverage](https://img.shields.io/jenkins/coverage/cobertura?jobUrl=http%3A%2F%2F68.183.37.154%3A8080%2Fjob%2Fmushroom-classification-api%2Fjob%2Fmaster%2F) | ![GitHub](https://img.shields.io/github/license/callumhoughton18/Mushroom-Classification) |
 
 A project, prototyped in Octave and implemented in Python, to use machine learning to classify a mushroom as poisonous/edible using the mushroom dataset from the UCI Machine Learning repository which can be viewed [here](https://www.kaggle.com/uciml/mushroom-classification).
 
