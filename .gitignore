@@ -44,5 +44,6 @@ nginx/nginx.conf
 .docker.env
 nosetests.xml
 results.xml
+coverage.xml
 pylint.log
 .coverage
