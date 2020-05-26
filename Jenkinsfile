@@ -65,6 +65,7 @@ pipeline {
             }
 
             sh "docker rmi ${apiImage.id} -f"
+            build job: 'Mushroom_Application_Deployment/Mushroom_Classification_Application_Deployment', wait: false
           }
         }
       }
