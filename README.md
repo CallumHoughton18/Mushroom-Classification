@@ -1,6 +1,6 @@
 # Mushroom Classification Model and API
 
-![Jenkins](https://img.shields.io/jenkins/build?jobUrl=http%3A%2F%2F68.183.37.154%3A8080%2Fjob%2FMushroom_Classification_API%2Fjob%2Fmaster%2F)  ![Jenkins tests](https://img.shields.io/jenkins/tests?compact_message&failed_label=failed&jobUrl=http%3A%2F%2F68.183.37.154%3A8080%2Fjob%2FMushroom_Classification_API%2Fjob%2Fmaster%2F&passed_label=passed) ![Jenkins Coverage](https://img.shields.io/jenkins/coverage/cobertura?jobUrl=http%3A%2F%2F68.183.37.154%3A8080%2Fjob%2FMushroom_Classification_API%2Fjob%2Fmaster%2F) ![GitHub](https://img.shields.io/github/license/CallumHoughton18/Mushroom-Classification)
+![Jenkins](https://img.shields.io/jenkins/build?jobUrl=http%3A%2F%2Fjenkins.mushroomai.site%2Fjob%2FMushroom_Classification_API%2Fjob%2Fmaster%2F)  ![Jenkins tests](https://img.shields.io/jenkins/tests?compact_message&failed_label=failed&jobUrl=http%3A%2F%2Fjenkins.mushroomai.site%2Fjob%2FMushroom_Classification_API%2Fjob%2Fmaster%2F&passed_label=passed) ![Jenkins Coverage](https://img.shields.io/jenkins/coverage/cobertura?jobUrl=http%3A%2F%2Fjenkins.mushroomai.site%2Fjob%2FMushroom_Classification_API%2Fjob%2Fmaster%2F) ![GitHub](https://img.shields.io/github/license/CallumHoughton18/Mushroom-Classification)
 
 A project, prototyped in Octave and implemented in Python, to use machine learning to classify a mushroom as poisonous/edible using the mushroom dataset from the UCI Machine Learning repository which can be viewed [here](https://www.kaggle.com/uciml/mushroom-classification).
 
@@ -19,6 +19,19 @@ The initial prototype for the Mushroom Classification model is found within the 
 The machine learning model is also implemented using python, which is all contained within the `src` folder. The `mushroom_classifier`  module is the actual implementation of the mushroom classifier model, while the `api` module uses the Flask Web Framework to expose the model via a RESTful Web API. 
 
 For using either it is advised that a virtual environment to be setup in the root directory of the project, and then some environmental variables to be set.
+
+## Demo
+
+A demo of the API is available at https://mushroomai.site/api.
+
+Examples of classifications can be seen using the below URLs
+
+| Mushroom Example             | URL                                                          |
+| ---------------------------- | ------------------------------------------------------------ |
+| Amanita muscaria (poisonous) | [API Link](https://mushroomai.site/api/prediction/submit?values=[{%22cap-shape%22:%22c%22,%22cap-surface%22:%22y%22,%22cap-color%22:%22e%22,%22bruises%22:%22f%22,%22odor%22:%22n%22,%22gill-attachment%22:%22f%22,%22gill-spacing%22:%22c%22,%22gill-size%22:%22n%22,%22gill-color%22:%22w%22,%22stalk-shape%22:%22e%22,%22stalk-root%22:%22b%22,%22stalk-surface-above-ring%22:%22s%22,%22stalk-surface-below-ring%22:%22s%22,%22stalk-color-above-ring%22:%22w%22,%22stalk-color-below-ring%22:%22w%22,%22veil-type%22:%22p%22,%22veil-color%22:%22w%22,%22ring-number%22:%22t%22,%22ring-type%22:%22s%22,%22spore-print-color%22:%22w%22,%22population%22:%22v%22,%22habitat%22:%22d%22}]) |
+| Agaricus bisporus (edible)   | [API Link](https://mushroomai.site/api/prediction/submit?values=[{%22cap-shape%22:%22c%22,%22cap-surface%22:%22y%22,%22cap-color%22:%22w%22,%22bruises%22:%22f%22,%22odor%22:%22n%22,%22gill-attachment%22:%22f%22,%22gill-spacing%22:%22w%22,%22gill-size%22:%22n%22,%22gill-color%22:%22n%22,%22stalk-shape%22:%22e%22,%22stalk-root%22:%22e%22,%22stalk-surface-above-ring%22:%22s%22,%22stalk-surface-below-ring%22:%22s%22,%22stalk-color-above-ring%22:%22w%22,%22stalk-color-below-ring%22:%22w%22,%22veil-type%22:%22p%22,%22veil-color%22:%22w%22,%22ring-number%22:%22t%22,%22ring-type%22:%22n%22,%22spore-print-color%22:%22n%22,%22population%22:%22v%22,%22habitat%22:%22d%22}]) |
+
+
 
 ## General Setup - Virtual Environment
 
@@ -79,32 +92,17 @@ Tests for the API are available within the `test_api`module.
 
 ## Docker Containers
 
-The Flask API is also containerized for both production and development using Docker and the accompanying `docker-compose-prod.yml` and `docker-compose.yml` files in the root of the project.
-
-The production yml file uses nginx as the web server and gunicorn as the WSGI server to the serve the application.
-
-For information on how to use [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) consult the documentation.
-
-### Docker Containers Setup
-
-For both docker-compose files a `.docker.env` file needs to be present in the root of the project. This should contain all the environment variables needed for the Flask API to run. For environment variables that specify paths the 'working directory' should be assumed to be the src folder. 
-
-An example .docker.env file, excluding any sensitive information, would be like:
-
-`FLASK_ENV=development
-FLASK_APP=./api/__init__.py
-DATASET_DIR=./files
-CURRENT_MODEL_DIR=./current_model
-TRAINED_MODELS_DIR=./trained_models
-FEATURE_DEFINITION_PATH=./api/features-definition.json
-LOGS_DIRECTORY=./api_logs`
-
-For the production docker-compose file an `nginx.conf` file needs to be present in the `nginx` directory. For instructions on how to setup this file read the [nginx documentation](https://www.linode.com/docs/web-servers/nginx/nginx-installation-and-basic-setup/).
+The Flask API is also containerized, to view an example of how it can be deployed check the [Mushroom Classifcation Deployment Repository](https://github.com/CallumHoughton18/Mushroom-Classification-Deployment)
 
 ## Jenkins CD/CI
 
 The project is configured for a CD/CI Pipeline via Jenkins 2.0, the 'pipeline as code' as available in the root `jenkinsfile`. 
-**The Jenkins server must have the initial recommended plugins when installing Jenkins, as well as the Warnings Next Generation plugin and the Cobertura plugin.**
+**The Jenkins server must have the initial recommended plugins when installing Jenkins, as well as the Warnings Next Generation plugin and the Cobertura plugin. You must also configure the extended email notification plugin**.
 
 Credentials also need to be configured for the pipeline. Which credentials, and of what type, can be easily seen via the `withCredentials` blocks.
 
+In the spirit of open source the Jenkins CI and CD jobs can be viewed [here](http://jenkins.mushroomai.site/)
+
+# Liability
+
+This project is purely to demonstrate how a machine learning model can be generated and then interacted with via a web API, **the project is not to be used in your decision on whether to consume a mushroom or not**. Any project authors/contributors are not responsible for any harm you inflict on yourself if you refuse to follow this rule.

@@ -69,7 +69,7 @@ class PredictionControllerTests(TestBase):
 
         self.perform_and_assert_on_invalid_values(incorrect_json, 400, 'values parameter must be a json array')
 
-    def test_should_return_false_for_poisonous_values(self):
+    def test_should_return_false_for_nonpoisonous_values(self):
         """Should return 200 response with poisonous field set to False"""
         correct_json = "[{\"cap-shape\":\"c\",\"cap-surface\":\"y\",\"cap-color\":\"w\",\"bruises\":\"f\",\"odor\":\"n\",\"gill-attachment\":\"f\",\"gill-spacing\":\"w\",\"gill-size\":\"n\",\"gill-color\":\"n\",\"stalk-shape\":\"e\",\"stalk-root\":\"e\",\"stalk-surface-above-ring\":\"s\",\"stalk-surface-below-ring\":\"s\",\"stalk-color-above-ring\":\"w\",\"stalk-color-below-ring\":\"w\",\"veil-type\":\"p\",\"veil-color\":\"w\",\"ring-number\":\"t\",\"ring-type\":\"n\",\"spore-print-color\":\"n\",\"population\":\"v\",\"habitat\":\"d\"}]"
 
