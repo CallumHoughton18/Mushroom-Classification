@@ -12,19 +12,19 @@ The Python implementation purposely only uses NumPy and Pandas for linear algebr
 
 # Octave Prototype
 
-The initial prototype for the Mushroom Classification model is found within the `prototyping` folder. The model is trained using the `train.m` or `train_withanalysis.m` scripts, with the latter outputting the validation and learning curve of the middle to the `imgs` sub directory.
+The initial prototype for the Mushroom Classification model is found within the `prototyping` folder. The model is trained using the `train.m` or `train_withanalysis.m` scripts, with the latter outputting the validation and learning curve of the model to the `imgs` sub directory.
 
 # Python Implementation
 
 The machine learning model is also implemented using python, which is all contained within the `src` folder. The `mushroom_classifier`  module is the actual implementation of the mushroom classifier model, while the `api` module uses the Flask Web Framework to expose the model via a RESTful Web API. 
 
-For using either it is advised that a virtual environment to be setup in the root directory of the project, and then some environmental variables to be set.
+For using either it is advised that a virtual environment to be setup in the root directory of the project, and then some environmental variables need to be set.
 
 ## Demo
 
 A demo of the API is available at https://mushroomai.site/api.
 
-Examples of classifications can be seen using the below URLs
+Examples of classifications can be seen using the below URLs.
 
 | Mushroom Example             | URL                                                          |
 | ---------------------------- | ------------------------------------------------------------ |
@@ -35,7 +35,7 @@ Examples of classifications can be seen using the below URLs
 
 ## General Setup - Virtual Environment
 
-A virtual environment should be used to work on the project, in the `src` folder of the project. Once the virtual environment is setup a `paths.pth` should be added to the virtual environments `site-packages` folder. This should just contain the absolute path to the `src` folder for the project. This allows the virtual environment to use treat the `src` folder as the 'root' of the python implementation of the project.
+A virtual environment should be used to work on the project, in the `src` folder of the project. Once the virtual environment is setup a `paths.pth` should be added to the virtual environments `site-packages` folder. This should just contain the absolute path to the `src` folder for the project. This allows the virtual environment to treat the `src` folder as the 'root' of the python implementation of the project.
 
 ## mushroom_classifier Module Setup and Description
 
@@ -70,11 +70,11 @@ The API also makes use of logging to log files, the directory for these logs fil
 
 `export LOGS_DIRECTORY=PATH-TO-LOG-FILE-DIRECTORY`
 
-The flask app can also be run by directly serving the `run.py` file or the `FLASK_APP` environment variable can be set to the absolute path of the `run.py` file:
+The flask app can be started via a development server by running the `manage.py` file via `python manage.py run` 
 
-`export FLASK_APP=PATH-TO-RUN.PY-FILE`
+The FLASK_APP environment variable should also be set to the API Modules `__init__.py` file, for example:
 
-Then the flask API can be ran using the from within the src folder with the command `python manage.py run`
+`export FLASK_APP=./src/api/__init__.py`
 
 The flask app environment can also be specified via the environment command:
 
@@ -86,22 +86,22 @@ For example, using the url:
 
 `http://127.0.0.1:5000/api/prediction/submit?values=[{%22cap-shape%22:%22c%22,%22cap-surface%22:%22y%22,%22cap-color%22:%22e%22,%22bruises%22:%22f%22,%22odor%22:%22n%22,%22gill-attachment%22:%22f%22,%22gill-spacing%22:%22c%22,%22gill-size%22:%22n%22,%22gill-color%22:%22w%22,%22stalk-shape%22:%22e%22,%22stalk-root%22:%22b%22,%22stalk-surface-above-ring%22:%22s%22,%22stalk-surface-below-ring%22:%22s%22,%22stalk-color-above-ring%22:%22w%22,%22stalk-color-below-ring%22:%22w%22,%22veil-type%22:%22p%22,%22veil-color%22:%22w%22,%22ring-number%22:%22t%22,%22ring-type%22:%22s%22,%22spore-print-color%22:%22w%22,%22population%22:%22v%22,%22habitat%22:%22d%22}]`
 
-The above URL how the mushroom attributes are added as JSON key values pairs to the JSON object within the 'values' JSON array. The response for this call will also be JSON, with a Poisonous key containing a value True or False depending on the models prediction.
+The above URL shows how the mushroom attributes are added as JSON key values pairs to the JSON object within the 'values' JSON array. The response for this call will also be JSON, with a Poisonous key containing a boolean value depending on the models prediction.
 
 Tests for the API are available within the `test_api`module.
 
 ## Docker Containers
 
-The Flask API is also containerized, to view an example of how it can be deployed check the [Mushroom Classifcation Deployment Repository](https://github.com/CallumHoughton18/Mushroom-Classification-Deployment)
+The Flask API is also containerized, to view an example of how it can be deployed check the [Mushroom Classification Deployment Repository](https://github.com/CallumHoughton18/Mushroom-Classification-Deployment).
 
 ## Jenkins CD/CI
 
 The project is configured for a CD/CI Pipeline via Jenkins 2.0, the 'pipeline as code' as available in the root `jenkinsfile`. 
 **The Jenkins server must have the initial recommended plugins when installing Jenkins, as well as the Warnings Next Generation plugin and the Cobertura plugin. You must also configure the extended email notification plugin**.
 
-Credentials also need to be configured for the pipeline. Which credentials, and of what type, can be easily seen via the `withCredentials` blocks.
+In the spirit of open source the Jenkins CI and CD jobs can be viewed [here](http://jenkins.mushroomai.site/).
 
-In the spirit of open source the Jenkins CI and CD jobs can be viewed [here](http://jenkins.mushroomai.site/)
+Credentials also need to be configured for the pipeline. Which credentials, and of what type, can be easily seen via the `withCredentials` blocks in the Jenkinsfile or via the viewable jobs for the demos.
 
 # Liability
 
