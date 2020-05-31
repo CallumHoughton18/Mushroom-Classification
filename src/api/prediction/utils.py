@@ -10,7 +10,7 @@ def verify_user_prediction(user_inputs_dic: dict, correct_definition_dic: dict):
         return False
 
     for user_key, user_value in user_inputs_dic.items():
-        possible_values = correct_definition_dic[user_key]
+        possible_values = correct_definition_dic[user_key].keys()
         if user_value not in possible_values:
             return False
 

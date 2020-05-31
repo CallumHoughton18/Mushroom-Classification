@@ -11,7 +11,7 @@ pipeline {
     DATASET_DIR='./src/files'
     CURRENT_MODEL_DIR='./src/current_model'
     TRAINED_MODELS_DIR='./src/trained_models'
-    FEATURE_DEFINITION_PATH='./src/api/features-definition.json'
+    FEATURE_DEFINITION_PATH='./src/files/features-definition.json'
     LOGS_DIRECTORY='./src/api_logs'
   }
   
