@@ -41,7 +41,9 @@ try:
     APP.DATA_CLEANER = DataCleaner(None, 'class', 'p')
     LOADED_COLUMNS = load(open(COLUMNS_FILE_PATH, 'rb'))
     APP.DATA_CLEANER.columns_for_index = LOADED_COLUMNS
-    APP.PREDICTION_DEFINITIONS = json.load(open(FEATURES_DEFINITION_PATH, 'rb'))
+
+    with open(FEATURES_DEFINITION_PATH, 'rb') as features_json:
+        APP.PREDICTION_DEFINITIONS = json.load(features_json)
 
     APP.register_blueprint(PREDICTION, url_prefix='/api/prediction')
     APP.register_blueprint(WEIGHTS, url_prefix='/api/weights')
