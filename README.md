@@ -80,6 +80,16 @@ The flask app environment can also be specified via the environment command:
 
 `export FLASK_ENV=development`
 
+For completeness, a full list of environment variables to be set would look like: 
+
+`FLASK_ENV=development
+FLASK_APP=./api/__init__.py
+DATASET_DIR=./files
+CURRENT_MODEL_DIR=./current_model
+TRAINED_MODELS_DIR=./trained_models
+FEATURE_DEFINITION_PATH=./files/features-definition.json
+LOGS_DIRECTORY=./api_logs`
+
 Once the application is running, mushroom features can be given the API to use the model to make a prediction.
 
 For example, using the url:
