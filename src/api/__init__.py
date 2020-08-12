@@ -7,6 +7,7 @@ import json
 import sys
 
 from flask import Flask, send_from_directory
+from flask_cors import CORS
 from werkzeug.exceptions import BadRequest, NotFound
 import pandas as pd
 
@@ -25,6 +26,9 @@ try:
     setup_logging(LOG_CONFIG_PATH, LOG_FILE_PATH)
 
     APP = Flask(__name__)
+
+    CORS = CORS(APP, resources={r"/api/*": {"origins": "*"}})
+
     APP.register_error_handler(BadRequest, http_error_as_json)
     APP.register_error_handler(NotFound, http_error_as_json)
     APP.register_error_handler(Exception, unhandled_exception_handler)
