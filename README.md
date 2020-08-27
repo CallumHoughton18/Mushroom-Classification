@@ -106,7 +106,7 @@ The Flask API is also containerized, to view an example of how it can be deploye
 
 ## Jenkins CD/CI
 
-The project is configured for a CD/CI Pipeline via Jenkins 2.0, the 'pipeline as code' as available in the root `jenkinsfile`. 
+The project is configured for a CD/CI Pipeline via Jenkins 2.0, the 'pipeline as code' is available in the root `jenkinsfile`. 
 **The Jenkins server must have the initial recommended plugins when installing Jenkins, as well as the Warnings Next Generation plugin and the Cobertura plugin. You must also configure the extended email notification plugin**.
 
 In the spirit of open source the Jenkins CI and CD jobs can be viewed [here](http://jenkins.mushroomai.site/).
