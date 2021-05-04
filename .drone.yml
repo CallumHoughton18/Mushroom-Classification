@@ -1,0 +1,27 @@
+global-variables:
+  environment: &default_environment
+    FLASK_ENV: "development"
+    FLASK_APP: "./src/api/__init__.py"
+    DATASET_DIR: "./src/files"
+    CURRENT_MODEL_DIR: "./src/current_model"
+    TRAINED_MODELS_DIR: "./src/trained_models"
+    FEATURE_DEFINITION_PATH: "./src/files/features-definition.json"
+    LOGS_DIRECTORY: "./src/api_logs"
+
+
+kind: pipeline
+type: docker
+name: mushroom-classification-flask-api-pipeline
+
+steps: 
+- name: build-and-test
+  environment:
+    <<: *default_environment
+  image: python:3.7.5-slim-buster
+  commands:
+    - pip install -r src/requirements.txt
+    - coverage run -m py.test -o junit_family=xunit2 --junitxml results.xml
+    - pylint --rcfile src/.pylintrc --exit-zero --output-format=parseable --reports=no src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier > pylint.log
+  when:
+    branch:
+    - devops/drone-io-integration
