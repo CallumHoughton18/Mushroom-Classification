@@ -22,6 +22,6 @@ steps:
     - pip install -r src/requirements.txt
     - coverage run -m py.test -o junit_family=xunit2 --junitxml results.xml
     - pylint --rcfile src/.pylintrc --exit-zero --output-format=parseable --reports=no src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier > pylint.log
-  when:
-    branch:
-    - devops/drone-io-integration
+  # when:
+  #   branch:
+  #   - devops/drone-io-integration
