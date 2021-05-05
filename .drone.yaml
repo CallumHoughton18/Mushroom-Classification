@@ -20,8 +20,19 @@ steps:
   image: python:3.7.5-slim-buster
   commands:
     - pip install -r src/requirements.txt
-    - coverage run -m py.test -o junit_family=xunit2 --junitxml results.xml
-    - pylint --rcfile src/.pylintrc --exit-zero --output-format=parseable --reports=no src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier > pylint.log
-  # when:
-  #   branch:
-  #   - devops/drone-io-integration
+    - coverage run -m py.test
+    - pylint --rcfile src/.pylintrc --exit-zero --output-format=parseable --reports=no src/api src/mushroom_classifier src/test_api src/test_mushroom_classifier
+
+- name: publish-docker-image  
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: dockerhubusername
+    password:
+      from_secret: dockerhubpassword
+    repo:
+      from_secret: dockerhubimage
+  auto_tag: true
+  when:
+    branch:
+    - master
