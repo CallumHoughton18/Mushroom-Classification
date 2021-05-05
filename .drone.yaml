@@ -32,6 +32,7 @@ steps:
       from_secret: dockerhubpassword
     repo:
       from_secret: dockerhubimage
+    dockerfile: ./src/dockerfile
   auto_tag: true
   when:
     branch:
