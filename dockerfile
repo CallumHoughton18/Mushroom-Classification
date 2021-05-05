@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Prevrnts buffering of stdout and stderror
 ENV PYTHONUNBUFFERED 1
 
-COPY . /app
+COPY ./src /app
 
 RUN ls /app
 
