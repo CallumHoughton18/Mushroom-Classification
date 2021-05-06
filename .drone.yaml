@@ -33,7 +33,9 @@ steps:
     repo:
       from_secret: dockerhubimage
     dockerfile: ./dockerfile
-  auto_tag: true
+  tags:
+  - latest
+  - '${DRONE_BUILD_NUMBER}'
   when:
     branch:
     - master
