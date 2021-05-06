@@ -50,7 +50,7 @@ steps:
       from_secret: authtoken
     fork: true
     repositories:
-      - '$deploymentreponame'
+      - CallumHoughton18/Mushroom-Classification-Deployment
   when:
     branch:
       - master
