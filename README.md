@@ -1,6 +1,8 @@
 # Mushroom Classification Model and API
 
-![Build Status](https://devops.callums-stuff.net/api/badges/CallumHoughton18/Mushroom-Classification/status.svg) ![GitHub](https://img.shields.io/github/license/CallumHoughton18/Mushroom-Classification)
+
+[![Build Status](https://devops.callums-stuff.net/api/badges/CallumHoughton18/Mushroom-Classification/status.svg)](https://devops.callums-stuff.net/CallumHoughton18/Mushroom-Classification)
+![GitHub](https://img.shields.io/github/license/CallumHoughton18/Mushroom-Classification)
 
 A project, prototyped in Octave and implemented in Python, to use machine learning to classify a mushroom as poisonous/edible using the mushroom dataset from the UCI Machine Learning repository which can be viewed [here](https://www.kaggle.com/uciml/mushroom-classification).
 
