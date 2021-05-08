@@ -37,20 +37,3 @@ steps:
   when:
     branch:
     - master
-
-- name: trigger  
-  image: plugins/downstream
-  environment:
-    deploymentreponame:
-      from_secret: deploymentreponame
-  settings:
-    server:
-      from_secret: droneservername
-    token:
-      from_secret: authtoken
-    fork: true
-    repositories:
-      - CallumHoughton18/Mushroom-Classification-Deployment
-  when:
-    branch:
-      - master
